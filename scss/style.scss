@@ -1,6 +1,10 @@
-@import "base/variables";
-@import "base/accessibility";
-@import "base/typography";
-@import "layout/header";
-@import "layout/footer";
-@import "layout/layout";
+@import 'base/variables';
+@import 'base/accessibility';
+@import 'base/typography';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/layout';
+
+body {
+  border: 5px solid blue;
+}
