@@ -6,6 +6,8 @@
  *
  * @package _s
  */
+$theme = wp_get_theme();
+define('THEME_VERSION', $theme->Version);
 
 if ( ! function_exists( '_s_setup' ) ) :
 	/**
@@ -99,6 +101,18 @@ function _s_content_width() {
 add_action( 'after_setup_theme', '_s_content_width', 0 );
 
 /**
+ * Register Custom Navigation Walker
+ */
+require_once('vendor/class-wp-bootstrap-navwalker.php');
+
+function navwalker_setup(){
+    register_nav_menus( array(
+		'primary' => __( 'Primary Menu' ),
+	) );
+}
+add_action('after_setup_theme', 'navwalker_setup');
+
+/**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
@@ -121,7 +135,8 @@ add_action( 'widgets_init', '_s_widgets_init' );
  */
 function _s_scripts() {
 	wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
-	wp_enqueue_style('style', '/wp-content/themes/n-abler/dist/style.css');
+	wp_enqueue_style('main_css', '/wp-content/themes/n-abler/dist/style.css', array(), THEME_VERSION);
+	wp_enqueue_script('main_js', '/wp-content/themes/n-abler/dist/main.js', array(), THEME_VERSION, true);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
