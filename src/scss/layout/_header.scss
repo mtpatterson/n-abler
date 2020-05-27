@@ -1,0 +1,44 @@
+// search form
+.na-search-form {
+  position: relative;
+  max-width: 277.61px;
+}
+
+.na-search-results {
+  border: 1px solid $gray;
+  border-radius: 0.25rem;
+  background: $white;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  margin-top: 40px;
+
+  .fas {
+    color: $gray;
+  }
+}
+
+.na-search-results-item {
+  padding: 0.5rem;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background: $light;
+  }
+}
+
+.na-search-results-loading {
+  padding: 0.813rem;
+}
+
+.na-search-results-item {
+  background: $white;
+  margin: 0 auto 5px;
+  text-align: left;
+  width: 100%;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
