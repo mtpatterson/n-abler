@@ -7,8 +7,6 @@
  * @package _s
  */
 
-$form_id = 'results_none';
-
 ?>
 
 <section class="no-results not-found">
