@@ -7,8 +7,8 @@
   "scripts": {
     "browser-sync": "browser-sync start --proxy 'n-abler.localhost' --watch --files '**/*.php, dist/**/*' --no-notify",
     "prefix:css": "postcss dist/*.css --use=autoprefixer --dir=dist",
-    "build:css": "sass --style=compressed scss:dist",
-    "watch:css": "onchange 'scss/**/*.scss' -- npm run build:css",
+    "build:css": "sass --style=compressed src/scss:dist",
+    "watch:css": "onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -p --watch",
     "start": "npm-run-all --parallel browser-sync watch:css webpack"
   },

@@ -1,8 +1,8 @@
 module.exports = {
   devtool: 'source-map',
   entry: {
-    main: './src/index.js',
-    home: './src/home/index.js',
+    main: './src/js/index.js',
+    home: './src/js/home/index.js',
   },
   output: {
     filename: '[name].js',

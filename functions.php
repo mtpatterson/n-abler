@@ -145,12 +145,13 @@ function page_scripts() {
 	$current_url =  home_url($wp->request);
 	$pages = get_pages();
 
-	// add each page's JS file
+	// add each page's JS and CSS files
 	foreach ($pages as $page) {
 		$title = strtolower($page->post_title);
 
 		if (is_page($title)) {
 			wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);
+			wp_enqueue_script("{$title}_css", "/wp-content/themes/n-abler/dist/pages/{$title}.css", array(), THEME_VERSION);
 		}
 	}
 }
