@@ -7,6 +7,8 @@
  * @package _s
  */
 
+$form_id = 'results_none';
+
 ?>
 
 <section class="no-results not-found">
@@ -36,14 +38,14 @@
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', '_s' ); ?></p>
 			<?php
-			get_search_form();
+			get_template_part( 'templates/partials/search', 'form' );
 
 		else :
 			?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', '_s' ); ?></p>
 			<?php
-			get_search_form();
+			get_template_part( 'templates/partials/search', 'form' );
 
 		endif;
 		?>
