@@ -9,20 +9,28 @@
     "prefix:css": "postcss dist/*.css --use=autoprefixer --dir=dist",
     "build:css": "sass --style=compressed src/scss:dist",
     "watch:css": "onchange 'src/scss/**/*.scss' -- npm run build:css",
-    "webpack": "webpack -p --watch",
-    "start": "npm-run-all --parallel browser-sync watch:css webpack"
+    "webpack": "webpack -d --watch",
+    "start": "npm-run-all --parallel browser-sync watch:css webpack",
+    "lint": "eslint ./src"
   },
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.10.1",
     "autoprefixer": "^9.7.6",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.26.7",
-    "eslint": "^7.0.0",
+    "core-js": "^3.6.5",
+    "eslint": "^7.1.0",
     "eslint-loader": "^4.0.2",
+    "eslint-plugin-react": "^7.20.0",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.0.2",
     "postcss": "^7.0.30",
@@ -36,7 +44,17 @@
   ],
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env",
+        {
+          "debug": false,
+          "modules": false,
+          "loose": true,
+          "useBuiltIns": "usage",
+          "corejs": "3"
+        }
+      ],
+      "@babel/preset-react"
     ]
   }
 }

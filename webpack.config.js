@@ -2,28 +2,33 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     main: './src/js/index.js',
-    home: './src/js/home/index.js',
+    home: './src/js/home/index.js'
   },
   output: {
-    filename: '[name].js',
+    filename: '[name].js'
   },
   module: {
     rules: [
       {
+        enforce: 'pre',
         test: /\.js$/,
-        exclude: [/node_modules/, /vendor/],
+        exclude: /node_modules/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            failOnError: true
+          }
+        }
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-          },
-          {
-            loader: 'eslint-loader',
-            options: {
-              failOnError: true,
-            },
-          },
-        ],
-      },
-    ],
-  },
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
+  }
 };
