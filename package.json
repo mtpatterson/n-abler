@@ -11,8 +11,8 @@
     "watch:css": "onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -d --watch",
     "start": "npm-run-all --parallel browser-sync watch:css webpack",
-    "build": "npm run lint && npm run build:css && webpack -d",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "npm run lint && npm run build:css && webpack -d"
   },
   "dependencies": {
     "lodash": "^4.17.15",
