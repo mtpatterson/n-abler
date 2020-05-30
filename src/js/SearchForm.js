@@ -83,7 +83,7 @@ function SearchForm({ postReq }) {
       role="search"
       method="get"
       action="/"
-      className="form-inline my-2 my-lg-0"
+      className="na-search-form form-inline my-2 my-lg-0"
       autoComplete="off"
     >
       <input
