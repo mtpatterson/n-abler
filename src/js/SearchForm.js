@@ -26,8 +26,12 @@ function SearchForm({ postReq }) {
 
   // async to make a request and await the response
   async function handleFetchPosts(targetValue) {
-    if (targetValue.trim('').length == 0) {
-      return setResults([]);
+    if (targetValue.trim('').length === 0) {
+      // clear results
+      return setResults(null);
+    } else if (targetValue.trim('').length < 2) {
+      // search after 2 characters
+      return false;
     }
 
     try {
