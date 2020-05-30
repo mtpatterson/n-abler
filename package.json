@@ -7,11 +7,12 @@
   "scripts": {
     "browser-sync": "browser-sync start --proxy 'n-abler.localhost' --watch --files '**/*.php, dist/**/*' --no-notify",
     "prefix:css": "postcss dist/*.css --use=autoprefixer --dir=dist",
-    "build:css": "sass --style=compressed src/scss:dist",
+    "build:css": "sass --style=expanded src/scss:dist",
     "watch:css": "onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -d --watch",
     "start": "npm-run-all --parallel browser-sync watch:css webpack",
-    "lint": "eslint ./src"
+    "build": "npm run lint && npm run build:css && webpack -d",
+    "lint": "eslint src"
   },
   "dependencies": {
     "lodash": "^4.17.15",
