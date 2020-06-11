@@ -9,12 +9,14 @@ const dropdowns = Array.prototype.slice.call(
 navbarToggler.addEventListener('click', () => {
   navbarCollapse.classList.toggle('show');
 });
+
 // toggle dropdowns
 dropdowns.forEach(dropdown => {
   dropdown.addEventListener('mouseenter', function () {
     this.querySelector('.dropdown-menu').classList.add('show');
     this.classList.add('show');
   });
+
   dropdown.addEventListener('mouseleave', function () {
     this.querySelector('.dropdown-menu').classList.remove('show');
     this.classList.remove('show');

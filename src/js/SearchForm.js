@@ -1,132 +1,119 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { string } from 'prop-types';
 import debounce from 'lodash/debounce';
+import SearchResults from './SearchResults';
 
-const ARROW_DOWN = 40;
-const ARROW_UP = 38;
+function SearchForm({ postReq }) {
+  // hooks to manage state
+  // when you call setInput, the input value will update
+  // and reflect changes in the returned JSX below
+  const [input, setInput] = useState(postReq ? postReq : '');
+  const [results, setResults] = useState(null);
+  const [submit, setSubmit] = useState(false);
 
-class SearchForm {
-  constructor(form) {
-    this.form = form;
-    this.formButton = form.querySelector('.js-search-button');
-    this.formInput = form.querySelector('.js-search-input');
-    this.formResults = form.querySelector('.js-search-results');
+  // DOM element references used in returned JSX below
+  const formRef = useRef();
+  const inputRef = useRef();
+  const firstResultRef = useRef();
 
-    this.clear();
-    this.events();
+  // handles side effects of the state changes above
+  // used to submit form with latest input value
+  useEffect(() => {
+    if (submit) {
+      formRef.current.submit();
+    }
+  }, [submit]);
+
+  // async to make a request and await the response
+  async function handleFetchPosts(targetValue) {
+    if (targetValue.trim('').length === 0) {
+      // clear results
+      return setResults(null);
+    } else if (targetValue.trim('').length < 2) {
+      // search after 2 characters
+      return false;
+    }
+
+    try {
+      // use try block to test if the request is sucessful
+      const res = await fetch(`/wp-json/wp/v2/posts?search=${targetValue}`);
+      const posts = await res.json();
+
+      setResults(posts);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  clear() {
-    this.dropdownElements = [];
-    this.responseItems = [];
-    this.searchValue = '';
+  function handleInputChange(e) {
+    setInput(e.target.value);
+
+    // limit the request to every half a second
+    debounce(handleFetchPosts, 500)(e.target.value);
   }
 
-  events() {
-    this.formInput.addEventListener('input', this.handleSearch.bind(this));
+  function onInputKeydown(e) {
+    if (e.key === 'ArrowDown' && firstResultRef.current) {
+      firstResultRef.current.focus();
+    }
+  }
 
-    // use arrow keys to navigate dropdown
-    this.formInput.addEventListener('keydown', e => {
-      if (e.keyCode === ARROW_DOWN) {
-        e.target.parentElement.querySelector('.js-search-results-item').focus();
+  function handleResultsClick(titleRendered) {
+    setInput(titleRendered);
+    setSubmit(true);
+  }
+
+  function handleResultsKeyDown(e) {
+    if (e.key === 'ArrowDown' && firstResultRef.current) {
+      if (e.target.nextElementSibling) {
+        e.target.nextElementSibling.focus();
       }
-    });
-  }
-
-  // create these events each time the results are found
-  dropdownEvents() {
-    this.dropdownElements.forEach(item => {
-      item.addEventListener('click', e => {
-        this.formResults.classList.add('hidden');
-
-        this.formInput.value = e.target.textContent;
-        this.form.action = `/${e.target.dataset.slug}`;
-
-        this.form.submit();
-      });
-
-      // use arrow keys to navigate dropdown
-      item.addEventListener('keydown', e => {
-        if (e.keyCode === ARROW_DOWN) {
-          if (e.target.nextElementSibling) {
-            e.target.nextElementSibling.focus();
-          }
-        } else if (e.keyCode === ARROW_UP) {
-          if (e.target.previousElementSibling) {
-            e.target.previousElementSibling.focus();
-          } else {
-            this.formInput.focus();
-          }
-        }
-      });
-    });
-  }
-
-  handleSearch(e) {
-    this.searchValue = e.target.value;
-
-    // add loading icon
-    if (!this.formResults.firstChild) {
-      this.formResults.classList.remove('hidden');
-
-      this.formResults.insertAdjacentHTML(
-        'afterbegin',
-        '<i class="fas na-search-results-loading fa-ellipsis-h"></i>'
-      );
+    } else if (e.key === 'ArrowUp') {
+      if (e.target.previousElementSibling) {
+        e.target.previousElementSibling.focus();
+      } else {
+        inputRef.current.focus();
+      }
     }
-
-    // fetch posts
-    debounce(this.handleFetchPosts, 500).bind(this)(e);
   }
 
-  handleFetchPosts() {
-    if (this.searchValue.length === 0) {
-      this.clear();
-
-      return this.formResults.classList.add('hidden');
-    }
-
-    fetch(`/wp-json/wp/v2/posts?search=${this.searchValue}`).then(res => {
-      res.json().then(posts => {
-        this.responseItems = posts.map(post => {
-          return {
-            slug: post.slug,
-            title: post.title.rendered,
-          };
-        });
-
-        this.render();
-      });
-    });
-  }
-
-  render() {
-    // remove all items
-    while (this.formResults.firstChild) {
-      this.formResults.removeChild(this.formResults.firstChild);
-    }
-
-    if (this.responseItems.length === 0) {
-      // no results from api
-      return this.formResults.insertAdjacentHTML(
-        'afterbegin',
-        `<div class="na-search-results-item btn">No results found</div>`
-      );
-    }
-
-    this.formResults.classList.remove('hidden');
-
-    this.responseItems.forEach(result => {
-      this.formResults.insertAdjacentHTML(
-        'afterbegin',
-        `<button type="button" class="js-search-results-item na-search-results-item btn" data-slug="${result.slug}">${result.title}</button>`
-      );
-    });
-
-    this.dropdownElements = Array.prototype.slice.call(
-      this.form.querySelectorAll('.js-search-results-item')
-    );
-
-    this.dropdownEvents();
-  }
+  return (
+    <form
+      ref={formRef}
+      role="search"
+      method="get"
+      action="/"
+      className="na-search-form form-inline my-2 my-lg-0"
+      autoComplete="off"
+    >
+      <input
+        ref={inputRef}
+        className="form-control mr-sm-2"
+        type="search"
+        name="s"
+        placeholder="Search"
+        aria-label="Search"
+        value={input}
+        onChange={handleInputChange}
+        onKeyDown={onInputKeydown}
+      />
+      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Search
+      </button>
+      {results && (
+        <SearchResults
+          results={results}
+          onClick={handleResultsClick}
+          onKeyDown={handleResultsKeyDown}
+          firstResultRef={firstResultRef}
+        />
+      )}
+    </form>
+  );
 }
+
+SearchForm.propTypes = {
+  postReq: string.isRequired
+};
 
 export default SearchForm;
