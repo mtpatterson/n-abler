@@ -150,8 +150,12 @@ function page_scripts() {
 		$title = strtolower($page->post_title);
 
 		if (is_page($title)) {
+			// page by title
 			wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);
 			wp_enqueue_script("{$title}_css", "/wp-content/themes/n-abler/dist/pages/{$title}.css", array(), THEME_VERSION);
+		} else if (isset($_GET["s"])) {
+			// search page
+			wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/search.js", array(), THEME_VERSION, true);
 		}
 	}
 }
