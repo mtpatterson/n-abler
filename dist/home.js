@@ -1,3 +1,5 @@
+var _NA = _NA || {};
+_NA.home =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -93,7 +95,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("console.log('home');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvaG9tZS9pbmRleC5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9ob21lL2luZGV4LmpzPzI5OGQiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc29sZS5sb2coJ2hvbWUnKTtcbiJdLCJtYXBwaW5ncyI6IkFBQUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/js/home/index.js\n");
+eval("console.log('home');//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvaG9tZS9pbmRleC5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovL19OQS5bbmFtZV0vLi9zcmMvanMvaG9tZS9pbmRleC5qcz8yOThkIl0sInNvdXJjZXNDb250ZW50IjpbImNvbnNvbGUubG9nKCdob21lJyk7XG4iXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/home/index.js\n");
 
 /***/ })
 
