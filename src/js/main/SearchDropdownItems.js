@@ -1,15 +1,15 @@
 import React from 'react';
 import { array, func, object } from 'prop-types';
 
-function SearchResults({ results, onClick, onKeyDown, firstResultRef }) {
+function SearchDropdownItems({ results, onClick, onKeyDown, firstResultRef }) {
   return (
-    <div className="na-search-results">
+    <div className="na-search-dropdown">
       {results.length > 0 ? (
         results.map(({ slug, title }, index) => {
           return (
             <button
               type="button"
-              className="na-search-results-item btn"
+              className="na-search-dropdown-item btn"
               title={title.rendered}
               onClick={() => onClick(title.rendered)}
               onKeyDown={onKeyDown}
@@ -21,17 +21,17 @@ function SearchResults({ results, onClick, onKeyDown, firstResultRef }) {
           );
         })
       ) : (
-        <div className="na-search-results-item btn">No results found</div>
+        <div className="na-search-dropdown-item btn">No results found</div>
       )}
     </div>
   );
 }
 
-SearchResults.propTypes = {
+SearchDropdownItems.propTypes = {
   results: array.isRequired,
   onClick: func.isRequired,
   onKeyDown: func.isRequired,
   firstResultRef: object
 };
 
-export default SearchResults;
+export default SearchDropdownItems;

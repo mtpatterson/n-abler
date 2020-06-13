@@ -3,7 +3,7 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    main: './src/js/index.js',
+    main: './src/js/main/index.js',
     home: './src/js/home/index.js',
     search: './src/js/search/index.js'
   },

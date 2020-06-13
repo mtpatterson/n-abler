@@ -14,31 +14,33 @@ get_header();
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main">
 
-		<!-- container for React app -->
-		<div class="js-search-page">Loading...</div>
+			<!-- container for React app -->
+			<div class="js-search-page">Loading...</div>
 
-		<?php if ( have_posts() ) :
+			<?php if ( have_posts() ) :
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+				/* Start the Loop */
+				while ( have_posts() ) :
+					the_post();
 
-				// add data from WordPress to an array
-				array_push($search_results, array(
-					'id' => get_the_ID(),
-					'title' => get_the_title(),
-					'thumbnail' => get_the_post_thumbnail_url(null, 'medium')
-				));
+					// add data from WordPress to an array
+					array_push($search_results, array(
+						'id' => get_the_ID(),
+						'title' => array(
+							'rendered' => get_the_title(),
+						),
+						'thumbnail' => get_the_post_thumbnail_url(null, 'medium')
+					));
 
-			endwhile;
+					// get_template_part( 'templates/content', 'search' );
 
-		else :
+				endwhile;
 
-			get_template_part( 'templates/content', 'none' );
+			else :
 
-		endif;
-		?>
+				get_template_part( 'templates/content', 'none' );
 
+			endif; ?>
 		</main><!-- #main -->
 	</section><!-- #primary -->
 
