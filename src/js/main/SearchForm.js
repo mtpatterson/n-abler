@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { string } from 'prop-types';
-import debounce from 'lodash/debounce';
-import SearchResults from './SearchResults';
+import SearchDropdownItems from './SearchDropdownItems';
+import { handleFetchPosts } from '../services';
 
 function SearchForm({ postReq }) {
   // hooks to manage state
@@ -24,32 +24,12 @@ function SearchForm({ postReq }) {
     }
   }, [submit]);
 
-  // async to make a request and await the response
-  async function handleFetchPosts(targetValue) {
-    if (targetValue.trim('').length === 0) {
-      // clear results
-      return setResults(null);
-    } else if (targetValue.trim('').length < 2) {
-      // search after 2 characters
-      return false;
-    }
-
-    try {
-      // use try block to test if the request is sucessful
-      const res = await fetch(`/wp-json/wp/v2/posts?search=${targetValue}`);
-      const posts = await res.json();
-
-      setResults(posts);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   function handleInputChange(e) {
+    // set form input value
     setInput(e.target.value);
 
-    // limit the request to every half a second
-    debounce(handleFetchPosts, 500)(e.target.value);
+    // handle request and set value
+    handleFetchPosts(e.target.value, setResults);
   }
 
   function onInputKeydown(e) {
@@ -78,37 +58,39 @@ function SearchForm({ postReq }) {
   }
 
   return (
-    <form
-      ref={formRef}
-      role="search"
-      method="get"
-      action="/"
-      className="na-search-form form-inline my-2 my-lg-0"
-      autoComplete="off"
-    >
-      <input
-        ref={inputRef}
-        className="form-control mr-sm-2"
-        type="search"
-        name="s"
-        placeholder="Search"
-        aria-label="Search"
-        value={input}
-        onChange={handleInputChange}
-        onKeyDown={onInputKeydown}
-      />
-      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search
-      </button>
+    <Fragment>
+      <form
+        ref={formRef}
+        role="search"
+        method="get"
+        action="/"
+        className="na-search-form form-inline my-2 my-lg-0"
+        autoComplete="off"
+      >
+        <input
+          ref={inputRef}
+          className="form-control mr-sm-2"
+          type="search"
+          name="s"
+          placeholder="Search"
+          aria-label="Search"
+          value={input}
+          onChange={handleInputChange}
+          onKeyDown={onInputKeydown}
+        />
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
       {results && (
-        <SearchResults
+        <SearchDropdownItems
           results={results}
           onClick={handleResultsClick}
           onKeyDown={handleResultsKeyDown}
           firstResultRef={firstResultRef}
         />
       )}
-    </form>
+    </Fragment>
   );
 }
 

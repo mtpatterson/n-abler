@@ -4,21 +4,21 @@
   max-width: 277.61px;
 }
 
-.na-search-results {
+.na-search-dropdown {
   border: 1px solid $gray;
   border-radius: 0.25rem;
   background: $white;
   position: absolute;
   width: 278px;
   top: 0;
-  margin-top: 40px;
+  margin-top: 54px;
 
   .fas {
     color: $gray;
   }
 }
 
-.na-search-results-item {
+.na-search-dropdown-item {
   padding: 0.5rem;
 
   &:hover,
@@ -28,11 +28,11 @@
   }
 }
 
-.na-search-results-loading {
+.na-search-dropdown-loading {
   padding: 0.813rem;
 }
 
-.na-search-results-item {
+.na-search-dropdown-item {
   background: $white;
   margin: 0 auto 5px;
   text-align: left;

@@ -6,4 +6,4 @@ if (isset($_GET['s'])):
     $input_value = $_GET['s'];
 endif; ?>
 
-<div class="js-search-form-container" data-value="<?= $input_value ?>"></div>
+<div class="js-search-form-navbar" data-value="<?= $input_value ?>"></div>
