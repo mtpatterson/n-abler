@@ -34,8 +34,6 @@ export default function useEndlessScroll(
           );
 
           setResults(results.concat(posts));
-
-          console.log(results.concat(posts));
           setLoading(false);
         }
       }
