@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 
-export const PER_PAGE = '5';
+export const PER_PAGE = '3';
 
 export async function handleFetchPosts(query, params = '') {
   try {
@@ -10,8 +10,9 @@ export async function handleFetchPosts(query, params = '') {
     );
 
     const posts = await res.json();
+    const pages = res.headers.get('x-wp-totalpages');
 
-    return posts;
+    return { posts, pages };
   } catch (err) {
     console.log(err);
   }
@@ -28,29 +29,34 @@ export function fetchPostsNavbar(query, setResults) {
       return false;
     }
 
-    const posts = await handleFetchPosts(query);
+    const { posts } = await handleFetchPosts(query);
 
     setResults(posts);
+
     // limit the request to every half a second
   }, 500)();
 }
 
-export function fetchPostsSearchPage(query, setResults) {
+export function fetchPostsSearchPage(query, setResults, setPages) {
   // limit the request to every half a second
   debounce(async () => {
-    // let user remove all text without resetting search
     if (query.trim('').length < 2) {
+      // search after 2 characters
       return false;
     }
 
-    // clear results
     if (query.trim('').length === 0) {
-      return setResults(null);
+      // clear results
+      setResults(null);
+      setPages(1);
+
+      return;
     }
 
-    const posts = await handleFetchPosts(query, '&_embed');
+    const { posts, pages } = await handleFetchPosts(query, '&_embed');
 
     setResults(posts);
+    setPages(pages);
 
     // limit the request to every half a second
   }, 500)();

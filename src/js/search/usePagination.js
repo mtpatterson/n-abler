@@ -19,7 +19,7 @@ export default function usePagination(query) {
     }
 
     fetchPagination();
-  }, [query]);
+  }, []);
 
-  return pages;
+  return [pages, setPages];
 }
