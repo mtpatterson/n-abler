@@ -2,7 +2,7 @@ import React from 'react';
 import { array } from 'prop-types';
 import { resizeUrl } from '../utils';
 
-export default function SearchPageItems({ posts }) {
+export default function SearchPagePosts({ posts }) {
   return (
     <div className="na-cards">
       {posts.map(({ id, title, _embedded = null }) => {
@@ -31,6 +31,6 @@ export default function SearchPageItems({ posts }) {
   );
 }
 
-SearchPageItems.propTypes = {
+SearchPagePosts.propTypes = {
   posts: array.isRequired
 };

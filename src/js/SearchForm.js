@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { string } from 'prop-types';
-import SearchDropdownItems from './SearchDropdownItems';
+import SearchDropdownPosts from './SearchDropdownPosts';
 import { fetchPostsNavbar } from './services';
 
 export default function SearchForm({ postReq }) {
@@ -82,7 +82,7 @@ export default function SearchForm({ postReq }) {
         </button>
       </form>
       {posts && (
-        <SearchDropdownItems
+        <SearchDropdownPosts
           posts={posts}
           onClick={handlePostsClick}
           onKeyDown={handlePostsKeyDown}

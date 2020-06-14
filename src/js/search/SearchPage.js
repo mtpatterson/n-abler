@@ -1,6 +1,6 @@
 import React, { useRef, useState, Fragment } from 'react';
 import { array, number } from 'prop-types';
-import SearchPageItems from './SearchPageItems';
+import SearchPagePosts from './SearchPagePosts';
 import { fetchPostsSearchPage } from '../services';
 import useEndlessScroll from './useEndlessScroll';
 
@@ -51,7 +51,7 @@ export default function SearchPage({ initialPosts, maxNumPages }) {
         <div className="col-md-8">
           {posts && posts.length > 0 ? (
             <Fragment>
-              <SearchPageItems posts={posts} />
+              <SearchPagePosts posts={posts} />
               <p className="text-center">
                 {loading && <i className="fa fa-spinner fa-spin fa-fw"></i>}
               </p>
