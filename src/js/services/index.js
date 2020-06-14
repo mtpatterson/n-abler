@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 
-// wordpress CMS default is 10
+// WordPress default is 10
 export const PER_PAGE = '10';
 
 export async function handleFetchPosts(query, params = '') {
