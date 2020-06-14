@@ -1,3 +1,13 @@
+.na-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+.na-card {
+  height: 300px;
+  margin: 2px;
+  width: 32.7%;
+}
 
 /*# sourceMappingURL=search.css.map */
