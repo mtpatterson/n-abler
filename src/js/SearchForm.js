@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { string } from 'prop-types';
 import SearchDropdownItems from './SearchDropdownItems';
-import { handleFetchPosts } from '../services';
+import { fetchPostsNavbar } from './services';
 
-function SearchForm({ postReq }) {
+export default function SearchForm({ postReq }) {
   // hooks to manage state
-  // when you call setInput, the input value will update
+  // when you call setQuery, the input value will update
   // and reflect changes in the returned JSX below
-  const [input, setInput] = useState(postReq ? postReq : '');
+  const [query, setQuery] = useState(postReq ? postReq : '');
   const [results, setResults] = useState(null);
   const [submit, setSubmit] = useState(false);
 
@@ -16,7 +16,6 @@ function SearchForm({ postReq }) {
   const inputRef = useRef();
   const firstResultRef = useRef();
 
-  // handles side effects of the state changes above
   // used to submit form with latest input value
   useEffect(() => {
     if (submit) {
@@ -26,10 +25,10 @@ function SearchForm({ postReq }) {
 
   function handleInputChange(e) {
     // set form input value
-    setInput(e.target.value);
+    setQuery(e.target.value);
 
     // handle request and set value
-    handleFetchPosts(e.target.value, setResults);
+    fetchPostsNavbar(e.target.value, setResults);
   }
 
   function onInputKeydown(e) {
@@ -39,7 +38,7 @@ function SearchForm({ postReq }) {
   }
 
   function handleResultsClick(titleRendered) {
-    setInput(titleRendered);
+    setQuery(titleRendered);
     setSubmit(true);
   }
 
@@ -74,7 +73,7 @@ function SearchForm({ postReq }) {
           name="s"
           placeholder="Search"
           aria-label="Search"
-          value={input}
+          value={query}
           onChange={handleInputChange}
           onKeyDown={onInputKeydown}
         />
@@ -97,5 +96,3 @@ function SearchForm({ postReq }) {
 SearchForm.propTypes = {
   postReq: string.isRequired
 };
-
-export default SearchForm;
