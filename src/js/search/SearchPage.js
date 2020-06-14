@@ -8,7 +8,7 @@ import useEndlessScroll from './useEndlessScroll';
 export default function SearchPage({ searchResults }) {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(window.location.search.split('=')[1]);
-  const pages = usePagination(query);
+  const [pages, setPages] = usePagination(query);
   const [results, setResults] = useEndlessScroll(
     searchResults,
     query,
@@ -22,7 +22,7 @@ export default function SearchPage({ searchResults }) {
     setQuery(e.target.value);
 
     // handle request and set value
-    fetchPostsSearchPage(e.target.value, setResults);
+    fetchPostsSearchPage(e.target.value, setResults, setPages);
   }
 
   return (
