@@ -153,7 +153,7 @@ function page_scripts() {
 			// page by title
 			wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);
 			wp_enqueue_style("{$title}_css", "/wp-content/themes/n-abler/dist/pages/{$title}.css", array(), THEME_VERSION);
-		} else if (isset($_GET["s"])) {
+		} else if (is_search()) {
 			// search page
 			wp_enqueue_script("search_js", "/wp-content/themes/n-abler/dist/search.js", array(), THEME_VERSION, true);
 			wp_enqueue_style("search_css", "/wp-content/themes/n-abler/dist/pages/search.css", array(), THEME_VERSION);
@@ -163,3 +163,14 @@ function page_scripts() {
 
 add_action( 'wp_enqueue_scripts', '_s_scripts' );
 add_action('wp_enqueue_scripts', 'page_scripts');
+
+/**
+ * Search only for posts
+ */
+function search_only_for_posts($query) {
+	if ($query->is_search) {
+		$query->set('post_type', 'post');
+	}
+	return $query;
+}
+add_filter('pre_get_posts','search_only_for_posts');
