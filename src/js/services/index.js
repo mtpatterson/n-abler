@@ -10,35 +10,35 @@ export async function handleFetchPosts(query, params = '') {
       `/wp-json/wp/v2/posts?per_page=${PER_PAGE}&search=${query}${params}`
     );
 
-    const posts = await res.json();
-    const pages = res.headers.get('x-wp-totalpages');
+    const newPosts = await res.json();
+    const newPages = res.headers.get('x-wp-totalpages');
 
-    return { posts, pages };
+    return { newPosts, newPages };
   } catch (err) {
     console.log(err);
   }
 }
 
-export function fetchPostsNavbar(query, setResults) {
+export function fetchPostsNavbar(query, setPosts) {
   // limit the request to every half a second
   debounce(async () => {
     if (query.trim('').length === 0) {
-      // clear results
-      return setResults(null);
+      // clear posts
+      return setPosts(null);
     } else if (query.trim('').length < 2) {
       // search after 2 characters
       return false;
     }
 
-    const { posts } = await handleFetchPosts(query);
+    const { newPosts } = await handleFetchPosts(query);
 
-    setResults(posts);
+    setPosts(newPosts);
 
     // limit the request to every half a second
   }, 500)();
 }
 
-export function fetchPostsSearchPage(query, setResults, setPages) {
+export function fetchPostsSearchPage(query, setPosts, setPages) {
   // limit the request to every half a second
   debounce(async () => {
     if (query.trim('').length < 2) {
@@ -47,17 +47,17 @@ export function fetchPostsSearchPage(query, setResults, setPages) {
     }
 
     if (query.trim('').length === 0) {
-      // clear results
-      setResults(null);
+      // clear posts
+      setPosts(null);
       setPages(1);
 
       return;
     }
 
-    const { posts, pages } = await handleFetchPosts(query, '&_embed');
+    const { newPosts, newPages } = await handleFetchPosts(query, '&_embed');
 
-    setResults(posts);
-    setPages(pages);
+    setPosts(newPosts);
+    setPages(newPages);
 
     // limit the request to every half a second
   }, 500)();

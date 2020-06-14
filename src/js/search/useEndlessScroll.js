@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { handleFetchPosts } from '../services';
 
 export default function useEndlessScroll(
-  searchResults,
+  initialPosts,
   query,
   pages,
   setLoading
 ) {
   const [prevQuery, setPrevQuery] = useState(query);
   const [currentPage, setCurrentPage] = useState(1);
-  const [results, setResults] = useState(searchResults);
+  const [posts, setPosts] = useState(initialPosts);
 
   // reset current page when query changes
   useEffect(() => {
@@ -28,12 +28,12 @@ export default function useEndlessScroll(
           setPrevQuery(query);
           setLoading(true);
 
-          const { posts } = await handleFetchPosts(
+          const { newPosts } = await handleFetchPosts(
             query,
             `&page=${nextPage}&_embed`
           );
 
-          setResults(results.concat(posts));
+          setPosts(posts.concat(newPosts));
           setLoading(false);
         }
       }
@@ -44,5 +44,5 @@ export default function useEndlessScroll(
     return () => window.removeEventListener('scroll', listenForBottom);
   });
 
-  return [results, setResults];
+  return [posts, setPosts];
 }

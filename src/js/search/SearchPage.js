@@ -1,16 +1,15 @@
 import React, { useRef, useState, Fragment } from 'react';
-import { array } from 'prop-types';
+import { array, number } from 'prop-types';
 import SearchPageItems from './SearchPageItems';
 import { fetchPostsSearchPage } from '../services';
-import usePagination from './usePagination';
 import useEndlessScroll from './useEndlessScroll';
 
-export default function SearchPage({ searchResults }) {
+export default function SearchPage({ initialPosts, maxNumPages }) {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(window.location.search.split('=')[1]);
-  const [pages, setPages] = usePagination(query);
-  const [results, setResults] = useEndlessScroll(
-    searchResults,
+  const [pages, setPages] = useState(maxNumPages);
+  const [posts, setPosts] = useEndlessScroll(
+    initialPosts,
     query,
     pages,
     setLoading
@@ -22,7 +21,7 @@ export default function SearchPage({ searchResults }) {
     setQuery(e.target.value);
 
     // handle request and set value
-    fetchPostsSearchPage(e.target.value, setResults, setPages);
+    fetchPostsSearchPage(e.target.value, setPosts, setPages);
   }
 
   return (
@@ -50,9 +49,9 @@ export default function SearchPage({ searchResults }) {
           </form>
         </div>
         <div className="col-md-8">
-          {results && results.length > 0 ? (
+          {posts && posts.length > 0 ? (
             <Fragment>
-              <SearchPageItems results={results} />
+              <SearchPageItems posts={posts} />
               <p className="text-center">
                 {loading && <i className="fa fa-spinner fa-spin fa-fw"></i>}
               </p>
@@ -67,5 +66,6 @@ export default function SearchPage({ searchResults }) {
 }
 
 SearchPage.propTypes = {
-  searchResults: array.isRequired
+  maxNumPages: number.isRequired,
+  initialPosts: array.isRequired
 };

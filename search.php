@@ -6,7 +6,9 @@
  *
  * @package _s
  */
-$search_results = [];
+global $wp_query;
+
+$initial_posts = [];
 
 get_header();
 ?>
@@ -21,7 +23,7 @@ get_header();
 				the_post();
 
 				// add data from WordPress to an array
-				array_push($search_results, array(
+				array_push($initial_posts, array(
 					'id' => get_the_ID(),
 					'title' => array(
 						'rendered' => get_the_title(),
@@ -44,5 +46,8 @@ get_footer(); ?>
 <script type="text/javascript">
 	// pass data to the search page initialize function
 	// this creates a React app
-	_NA.search.initSearchPage(<?php echo json_encode($search_results); ?>);
+	_NA.search.initSearchPage(
+		<?php echo json_encode($initial_posts); ?>,
+		<?php echo json_encode($wp_query->max_num_pages); ?>
+	);
 </script>
