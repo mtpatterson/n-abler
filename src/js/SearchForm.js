@@ -8,7 +8,7 @@ export default function SearchForm({ postReq }) {
   // when you call setQuery, the input value will update
   // and reflect changes in the returned JSX below
   const [query, setQuery] = useState(postReq ? postReq : '');
-  const [results, setResults] = useState(null);
+  const [posts, setPosts] = useState(null);
   const [submit, setSubmit] = useState(false);
 
   // DOM element references used in returned JSX below
@@ -28,7 +28,7 @@ export default function SearchForm({ postReq }) {
     setQuery(e.target.value);
 
     // handle request and set value
-    fetchPostsNavbar(e.target.value, setResults);
+    fetchPostsNavbar(e.target.value, setPosts);
   }
 
   function onInputKeydown(e) {
@@ -37,12 +37,12 @@ export default function SearchForm({ postReq }) {
     }
   }
 
-  function handleResultsClick(titleRendered) {
+  function handlePostsClick(titleRendered) {
     setQuery(titleRendered);
     setSubmit(true);
   }
 
-  function handleResultsKeyDown(e) {
+  function handlePostsKeyDown(e) {
     if (e.key === 'ArrowDown' && firstResultRef.current) {
       if (e.target.nextElementSibling) {
         e.target.nextElementSibling.focus();
@@ -81,11 +81,11 @@ export default function SearchForm({ postReq }) {
           Search
         </button>
       </form>
-      {results && (
+      {posts && (
         <SearchDropdownItems
-          results={results}
-          onClick={handleResultsClick}
-          onKeyDown={handleResultsKeyDown}
+          posts={posts}
+          onClick={handlePostsClick}
+          onKeyDown={handlePostsKeyDown}
           firstResultRef={firstResultRef}
         />
       )}

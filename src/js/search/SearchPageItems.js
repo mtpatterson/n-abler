@@ -1,20 +1,19 @@
 import React from 'react';
 import { array } from 'prop-types';
+import { resizeUrl } from '../utils';
 
-export default function SearchPageItems({ results }) {
+export default function SearchPageItems({ posts }) {
   return (
     <div className="na-cards">
-      {results.map(({ id, title, _embedded = false }) => {
+      {posts.map(({ id, title, _embedded = null }) => {
         let sourceUrl;
 
-        // url from template
         if (_embedded.featured_media) {
+          // url from template
           sourceUrl = _embedded.featured_media;
         } else if (_embedded['wp:featuredmedia']) {
           // url from REST API
-          sourceUrl =
-            _embedded['wp:featuredmedia'][0].media_details.sizes.medium
-              .source_url;
+          sourceUrl = resizeUrl(_embedded, 'medium');
         }
 
         return (
@@ -33,5 +32,5 @@ export default function SearchPageItems({ results }) {
 }
 
 SearchPageItems.propTypes = {
-  results: array.isRequired
+  posts: array.isRequired
 };
