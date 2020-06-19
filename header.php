@@ -51,4 +51,4 @@
 		</nav>
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content bg-light full-page pt-5">
+	<div id="content" class="site-content bg-light full-page py-5">

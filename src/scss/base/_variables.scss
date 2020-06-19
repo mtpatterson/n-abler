@@ -6,10 +6,14 @@ $dark: #4a4a4a;
 $gray: #ced4db;
 $light: #f8f9fa;
 
-// fonts
+// Small devices (landscape phones, 576px and up)
+$xsmall: '(min-width: 576px)';
 
-// media queries
-$xsmall: '(max-width: 575.98px)';
-$small: '(max-width: 767.98px)';
-$medium: '(max-width: 991.98px)';
-$large: '(max-width: 1199.98px)';
+// Medium devices (tablets, 768px and up)
+$small: '(min-width: 768px)';
+
+// Large devices (desktops, 992px and up)
+$medium: '(min-width: 992px)';
+
+// Extra large devices (large desktops, 1200px and up)
+$large: '(min-width: 1200px)';

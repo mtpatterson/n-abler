@@ -1,10 +1,16 @@
-import React, { useRef, useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { array, number } from 'prop-types';
 import SearchPagePosts from './SearchPagePosts';
 import { fetchPostsSearchPage } from '../services';
 import useEndlessScroll from './useEndlessScroll';
+import TermItem from './TermItem';
 
-export default function SearchPage({ initialPosts, maxNumPages }) {
+export default function SearchPage({
+  initialPosts,
+  categories,
+  tags,
+  maxNumPages
+}) {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(window.location.search.split('=')[1]);
   const [pages, setPages] = useState(maxNumPages);
@@ -14,7 +20,6 @@ export default function SearchPage({ initialPosts, maxNumPages }) {
     pages,
     setLoading
   );
-  const formRef = useRef();
 
   function handleSearchInputChange(e) {
     // set form input value
@@ -24,17 +29,20 @@ export default function SearchPage({ initialPosts, maxNumPages }) {
     fetchPostsSearchPage(e.target.value, setPosts, setPages);
   }
 
+  function handleToggleTerms(e) {
+    console.log(e);
+  }
+
   return (
     <div className="py-4 px-5 rounded shadow container bg-white">
       <h1>Search Results</h1>
       <div className="row">
         <div className="col-xs-12 col-md-4">
           <form
-            ref={formRef}
             role="search"
             method="get"
             action="/"
-            className="form-inline my-2 my-lg-0"
+            className="my-2 my-lg-0"
             autoComplete="off"
             onSubmit={e => e.preventDefault()}
           >
@@ -46,16 +54,44 @@ export default function SearchPage({ initialPosts, maxNumPages }) {
               value={query}
               onChange={handleSearchInputChange}
             />
+            <div>
+              <h2>Categories:</h2>
+              {categories.map(cat => {
+                return (
+                  <TermItem
+                    key={cat.term_id}
+                    name={cat.cat_name}
+                    count={cat.category_count}
+                    slug={cat.slug}
+                    onClick={handleToggleTerms}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              <h2>Tags:</h2>
+              {tags.map(tag => {
+                return (
+                  <TermItem
+                    key={tag.term_id}
+                    name={tag.name}
+                    count={tag.count}
+                    slug={tag.slug}
+                    onClick={handleToggleTerms}
+                  />
+                );
+              })}
+            </div>
           </form>
         </div>
         <div className="col-md-8">
           {posts && posts.length > 0 ? (
-            <Fragment>
+            <div className="na-cards">
               <SearchPagePosts posts={posts} />
               <p className="text-center">
                 {loading && <i className="fa fa-spinner fa-spin fa-fw"></i>}
               </p>
-            </Fragment>
+            </div>
           ) : (
             <div>No results</div>
           )}
@@ -66,6 +102,8 @@ export default function SearchPage({ initialPosts, maxNumPages }) {
 }
 
 SearchPage.propTypes = {
-  maxNumPages: number.isRequired,
-  initialPosts: array.isRequired
+  initialPosts: array.isRequired,
+  categories: array.isRequired,
+  tags: array.isRequired,
+  maxNumPages: number.isRequired
 };

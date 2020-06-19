@@ -1,20 +1,26 @@
-export function resizeUrl(_embedded, resize) {
-  let heightWidth;
+export function resizeUrl(featuredMedia, resize) {
+  let first;
+  let last;
+  let size;
 
   if (resize === 'medium') {
-    heightWidth = '300x225';
+    size = '300x225';
   } else if (resize === 'large') {
-    heightWidth = '1024x768';
+    size = '1024x768';
   } else if (resize === 'thumbnail') {
-    heightWidth = '150x150';
+    size = '150x150';
   }
 
-  let [
-    first,
-    last
-  ] = `/wp-content/uploads/${_embedded['wp:featuredmedia'][0].media_details.file}`.split(
-    '.'
-  );
+  if (Array.isArray(featuredMedia)) {
+    // from from REST API
+    [
+      first,
+      last
+    ] = `/wp-content/uploads/${featuredMedia[0].media_details.file}`.split('.');
+  } else {
+    // from initial data
+    [first, last] = `${featuredMedia}`.split('.');
+  }
 
-  return `${first}-${heightWidth}.${last}`;
+  return `${first}-${size}.${last}`;
 }
