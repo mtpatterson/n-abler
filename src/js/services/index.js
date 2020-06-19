@@ -41,19 +41,6 @@ export function fetchPostsNavbar(query, setPosts) {
 export function fetchPostsSearchPage(query, setPosts, setPages) {
   // limit the request to every half a second
   debounce(async () => {
-    if (query.trim('').length < 2) {
-      // search after 2 characters
-      return false;
-    }
-
-    if (query.trim('').length === 0) {
-      // clear posts
-      setPosts(null);
-      setPages(1);
-
-      return;
-    }
-
     const { newPosts, newPages } = await handleFetchPosts(query, '&_embed');
 
     setPosts(newPosts);
