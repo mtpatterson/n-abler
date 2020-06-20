@@ -17,6 +17,7 @@
     "validate": "npm run test && lint-staged"
   },
   "dependencies": {
+    "core-js": "^3.6.5",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -69,7 +70,10 @@
       [
         "@babel/preset-env",
         {
-          "debug": false
+          "debug": false,
+          "loose": true,
+          "useBuiltIns": "usage",
+          "corejs": "3"
         }
       ],
       "@babel/preset-react"
