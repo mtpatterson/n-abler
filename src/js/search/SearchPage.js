@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { array, number } from 'prop-types';
 import SearchPagePosts from './SearchPagePosts';
-import { fetchPostsSearchPage } from '../services';
+import { handleSearchByFilter } from '../services';
 import useEndlessScroll from './useEndlessScroll';
 import TermItem from './TermItem';
 
@@ -19,57 +19,26 @@ export default function SearchPage({
     initialPosts,
     query,
     pages,
-    setLoading,
-    filteredBy
+    filteredBy,
+    setLoading
   );
-
-  async function handleSearchByFilter(value = query) {
-    let newByCategory = {
-      newPosts: []
-    };
-    let newByTag = {
-      newPosts: []
-    };
-
-    // only make request for categories if filtering by category
-    if (filteredBy.categories.length > 0) {
-      newByCategory = await fetchPostsSearchPage(
-        value,
-        `&_embed&categories=${filteredBy.categories}`
-      );
-    }
-
-    // only make request for tags if filtering by tag
-    if (filteredBy.tags.length > 0) {
-      newByTag = await fetchPostsSearchPage(
-        value,
-        `&_embed&tags=${filteredBy.tags}`
-      );
-    }
-
-    const allFiltersRemoved =
-      filteredBy.categories.length === 0 && filteredBy.tags.length === 0;
-
-    if (allFiltersRemoved) {
-      const { newPosts, newPages } = await fetchPostsSearchPage(
-        value,
-        '&_embed'
-      );
-
-      setPosts(newPosts);
-      setPages(newPages);
-      setCurrentPage(1);
-    } else {
-      setPosts(newByCategory.newPosts.concat(newByTag.newPosts));
-      setPages(newByCategory.newPages + newByTag.newPages);
-    }
-  }
 
   async function handleSearchInputChange(e) {
     // set form input value
     setQuery(e.target.value);
 
-    handleSearchByFilter(e.target.value);
+    const {
+      newPosts,
+      newPages,
+      currentPage = false
+    } = await handleSearchByFilter(e.target.value, filteredBy);
+
+    setPosts(newPosts);
+    setPages(newPages);
+
+    if (currentPage) {
+      setCurrentPage(currentPage);
+    }
   }
 
   async function handleFilterByTerm(term_id, type) {
@@ -83,7 +52,17 @@ export default function SearchPage({
 
     setFilteredBy(filteredBy);
 
-    handleSearchByFilter();
+    const { newPosts, newPages, currentPage } = await handleSearchByFilter(
+      query,
+      filteredBy
+    );
+
+    setPosts(newPosts);
+    setPages(newPages);
+
+    if (currentPage) {
+      setCurrentPage(currentPage);
+    }
   }
 
   return (
@@ -104,6 +83,7 @@ export default function SearchPage({
               type="search"
               placeholder="Search"
               aria-label="Search"
+              role="textbox"
               value={query}
               onChange={handleSearchInputChange}
             />

@@ -1,19 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SearchPage from '@frontend/search/SearchPage';
 import { posts, categories, tags } from './data';
 
 describe('<SearchPage />', () => {
   test('search page', () => {
-    const wrapper = render(
+    render(
       <SearchPage
         initialPosts={posts}
-        maxNumPages={1}
         categories={categories}
         tags={tags}
+        maxNumPages={1}
       />
     );
 
-    console.log(wrapper);
+    const input = screen.getByRole('textbox');
+
+    input.value = 'test';
+
+    console.log(input.value);
   });
 });

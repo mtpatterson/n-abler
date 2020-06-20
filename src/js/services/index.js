@@ -19,19 +19,61 @@ export async function handleFetchPosts(query, params = '') {
   }
 }
 
-export function fetchPostsNavbar(query) {
-  if (query.trim('').length < 2) {
-    // search after 2 characters
-    return {};
-  }
-
-  return debounce(() => handleFetchPosts(query), 500, {
+export function debounceRequestPosts(query, params) {
+  return debounce(() => handleFetchPosts(query, params), 500, {
     leading: true
   })();
 }
 
-export function fetchPostsSearchPage(query, params) {
-  return debounce(() => handleFetchPosts(query, params), 500, {
-    leading: true
-  })();
+export async function handleSearchByFilter(
+  value,
+  filteredBy,
+  pageParam = false
+) {
+  let newByCategory = {
+    newPosts: [],
+    newPages: 0
+  };
+  let newByTag = {
+    newPosts: [],
+    newPages: 0
+  };
+
+  // only make request for categories if filtering by category
+  if (filteredBy.categories.length > 0) {
+    newByCategory = await handleFetchPosts(
+      value,
+      `&_embed&categories=${filteredBy.categories}${pageParam ? pageParam : ''}`
+    );
+  }
+
+  // only make request for tags if filtering by tag
+  if (filteredBy.tags.length > 0) {
+    newByTag = await handleFetchPosts(
+      value,
+      `&_embed&tags=${filteredBy.tags}${pageParam ? pageParam : ''}`
+    );
+  }
+
+  const allFiltersRemoved =
+    filteredBy.categories.length === 0 && filteredBy.tags.length === 0;
+
+  if (allFiltersRemoved) {
+    const { newPosts, newPages } = await handleFetchPosts(
+      value,
+      `&_embed${pageParam ? pageParam : ''}`
+    );
+
+    return {
+      newPosts,
+      newPages,
+      currentPage: 1
+    };
+  } else {
+    return {
+      newPosts: newByCategory.newPosts.concat(newByTag.newPosts),
+      newPages: Number(newByCategory.newPages) + newByTag.newPages,
+      currentPage: false
+    };
+  }
 }
