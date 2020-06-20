@@ -1,5 +1,8 @@
+import React from 'react';
+import SearchPage from '@frontend/search/SearchPage';
+
 describe('<SearchPage />', () => {
-  test('adds 1 + 2', () => {
-    expect(1 + 2).toBe(3);
+  test('search page', () => {
+    expect(SearchPage).toBeTruthy();
   });
 });
