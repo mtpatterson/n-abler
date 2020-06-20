@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   devtool: 'source-map',
@@ -36,6 +37,11 @@ module.exports = {
         ]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '@frontend': path.resolve(__dirname, './src/js')
+    }
   },
   plugins: [
     new webpack.BannerPlugin({
