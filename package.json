@@ -86,7 +86,7 @@
     "moduleNameMapper": {
       "^@frontend/(.*)$": "<rootDir>/src/js/$1"
     },
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
       "<rootDir>/test/setup"
     ]
