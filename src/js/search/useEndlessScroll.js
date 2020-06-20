@@ -44,5 +44,5 @@ export default function useEndlessScroll(
     return () => window.removeEventListener('scroll', listenForBottom);
   });
 
-  return [posts, setPosts];
+  return [posts, setPosts, setCurrentPage];
 }

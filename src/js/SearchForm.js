@@ -23,12 +23,14 @@ export default function SearchForm({ postReq }) {
     }
   }, [submit]);
 
-  function handleInputChange(e) {
+  async function handleInputChange(e) {
     // set form input value
     setQuery(e.target.value);
 
     // handle request and set value
-    fetchPostsNavbar(e.target.value, setPosts);
+    const { newPosts } = await fetchPostsNavbar(e.target.value);
+
+    setPosts(newPosts);
   }
 
   function onInputKeydown(e) {
