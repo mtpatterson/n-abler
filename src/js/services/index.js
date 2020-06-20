@@ -19,33 +19,19 @@ export async function handleFetchPosts(query, params = '') {
   }
 }
 
-export function fetchPostsNavbar(query, setPosts) {
-  // limit the request to every half a second
-  debounce(async () => {
-    if (query.trim('').length === 0) {
-      // clear posts
-      return setPosts(null);
-    } else if (query.trim('').length < 2) {
-      // search after 2 characters
-      return false;
-    }
+export function fetchPostsNavbar(query) {
+  if (query.trim('').length < 2) {
+    // search after 2 characters
+    return {};
+  }
 
-    const { newPosts } = await handleFetchPosts(query);
-
-    setPosts(newPosts);
-
-    // limit the request to every half a second
-  }, 500)();
+  return debounce(() => handleFetchPosts(query), 500, {
+    leading: true
+  })();
 }
 
-export function fetchPostsSearchPage(query, setPosts, setPages) {
-  // limit the request to every half a second
-  debounce(async () => {
-    const { newPosts, newPages } = await handleFetchPosts(query, '&_embed');
-
-    setPosts(newPosts);
-    setPages(newPages);
-
-    // limit the request to every half a second
-  }, 500)();
+export function fetchPostsSearchPage(query, params) {
+  return debounce(() => handleFetchPosts(query, params), 500, {
+    leading: true
+  })();
 }

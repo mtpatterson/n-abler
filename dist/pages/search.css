@@ -19,4 +19,8 @@
   width: 100%;
 }
 
+.na-btn-term.active {
+  background: #ddd;
+}
+
 /*# sourceMappingURL=search.css.map */

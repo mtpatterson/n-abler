@@ -49,7 +49,7 @@ li {
 }
 
 .na-search-dropdown {
-  border: 1px solid #ced4db;
+  border: 1px solid #ddd;
   border-radius: 0.25rem;
   background: #fff;
   position: absolute;
@@ -59,7 +59,7 @@ li {
   z-index: 1;
 }
 .na-search-dropdown .fas {
-  color: #ced4db;
+  color: #ddd;
 }
 
 .na-search-dropdown-item {

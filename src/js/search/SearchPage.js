@@ -14,23 +14,76 @@ export default function SearchPage({
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(window.location.search.split('=')[1]);
   const [pages, setPages] = useState(maxNumPages);
-  const [posts, setPosts] = useEndlessScroll(
+  const [filteredBy, setFilteredBy] = useState({ categories: [], tags: [] });
+  const [posts, setPosts, setCurrentPage] = useEndlessScroll(
     initialPosts,
     query,
     pages,
-    setLoading
+    setLoading,
+    filteredBy
   );
 
-  function handleSearchInputChange(e) {
+  async function handleSearchByFilter(value = query) {
+    let newByCategory = {
+      newPosts: []
+    };
+    let newByTag = {
+      newPosts: []
+    };
+
+    // only make request for categories if filtering by category
+    if (filteredBy.categories.length > 0) {
+      newByCategory = await fetchPostsSearchPage(
+        value,
+        `&_embed&categories=${filteredBy.categories}`
+      );
+    }
+
+    // only make request for tags if filtering by tag
+    if (filteredBy.tags.length > 0) {
+      newByTag = await fetchPostsSearchPage(
+        value,
+        `&_embed&tags=${filteredBy.tags}`
+      );
+    }
+
+    const allFiltersRemoved =
+      filteredBy.categories.length === 0 && filteredBy.tags.length === 0;
+
+    if (allFiltersRemoved) {
+      const { newPosts, newPages } = await fetchPostsSearchPage(
+        value,
+        '&_embed'
+      );
+
+      setPosts(newPosts);
+      setPages(newPages);
+      setCurrentPage(1);
+    } else {
+      setPosts(newByCategory.newPosts.concat(newByTag.newPosts));
+      setPages(newByCategory.newPages + newByTag.newPages);
+    }
+  }
+
+  async function handleSearchInputChange(e) {
     // set form input value
     setQuery(e.target.value);
 
-    // handle request and set value
-    fetchPostsSearchPage(e.target.value, setPosts, setPages);
+    handleSearchByFilter(e.target.value);
   }
 
-  function handleToggleTerms(e) {
-    console.log(e);
+  async function handleFilterByTerm(term_id, type) {
+    const found = filteredBy[type].find(i => i === term_id);
+
+    if (!found) {
+      filteredBy[type].push(term_id);
+    } else {
+      filteredBy[type] = filteredBy[type].filter(i => i !== term_id);
+    }
+
+    setFilteredBy(filteredBy);
+
+    handleSearchByFilter();
   }
 
   return (
@@ -62,8 +115,9 @@ export default function SearchPage({
                     key={cat.term_id}
                     name={cat.cat_name}
                     count={cat.category_count}
-                    slug={cat.slug}
-                    onClick={handleToggleTerms}
+                    handleFilterByTerm={() =>
+                      handleFilterByTerm(cat.term_id, 'categories')
+                    }
                   />
                 );
               })}
@@ -76,8 +130,9 @@ export default function SearchPage({
                     key={tag.term_id}
                     name={tag.name}
                     count={tag.count}
-                    slug={tag.slug}
-                    onClick={handleToggleTerms}
+                    handleFilterByTerm={() =>
+                      handleFilterByTerm(tag.term_id, 'tags')
+                    }
                   />
                 );
               })}
@@ -93,7 +148,7 @@ export default function SearchPage({
               </p>
             </div>
           ) : (
-            <div>No results</div>
+            <div>No results found</div>
           )}
         </div>
       </div>
