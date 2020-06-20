@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { handleFetchPosts } from '../services';
+import { handleSearchByFilter } from '../services';
 
 export default function useEndlessScroll(
   initialPosts,
   query,
   pages,
+  filteredBy,
   setLoading
 ) {
   const [prevQuery, setPrevQuery] = useState(query);
@@ -28,9 +29,10 @@ export default function useEndlessScroll(
           setPrevQuery(query);
           setLoading(true);
 
-          const { newPosts } = await handleFetchPosts(
+          const { newPosts } = await handleSearchByFilter(
             query,
-            `&page=${nextPage}&_embed`
+            filteredBy,
+            `&page=${nextPage}`
           );
 
           setPosts(posts.concat(newPosts));

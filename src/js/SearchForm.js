@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { string } from 'prop-types';
 import SearchDropdownPosts from './SearchDropdownPosts';
-import { fetchPostsNavbar } from './services';
+import { debounceRequestPosts } from './services';
 
 export default function SearchForm({ postReq }) {
   // hooks to manage state
@@ -27,8 +27,13 @@ export default function SearchForm({ postReq }) {
     // set form input value
     setQuery(e.target.value);
 
+    if (query.trim('').length < 2) {
+      // search after 2 characters
+      return setPosts({});
+    }
+
     // handle request and set value
-    const { newPosts } = await fetchPostsNavbar(e.target.value);
+    const { newPosts } = await debounceRequestPosts(e.target.value);
 
     setPosts(newPosts);
   }
