@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { handleSearchByFilter } from '../services';
+import { fetchFilteredPosts } from '../services';
 
 export default function useEndlessScroll(
   initialPosts,
@@ -29,7 +29,7 @@ export default function useEndlessScroll(
           setPrevQuery(query);
           setLoading(true);
 
-          const { newPosts } = await handleSearchByFilter(
+          const { newPosts } = await fetchFilteredPosts(
             query,
             filteredBy,
             `&page=${nextPage}`

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { string } from 'prop-types';
 import SearchDropdownPosts from './SearchDropdownPosts';
-import { debounceRequestPosts } from './services';
+import { debounceFetchPosts } from './services';
 
 export default function SearchForm({ postReq }) {
   // hooks to manage state
@@ -33,7 +33,7 @@ export default function SearchForm({ postReq }) {
     }
 
     // handle request and set value
-    const { newPosts } = await debounceRequestPosts(e.target.value);
+    const { newPosts } = await debounceFetchPosts(e.target.value);
 
     setPosts(newPosts);
   }

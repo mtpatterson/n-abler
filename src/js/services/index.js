@@ -3,7 +3,7 @@ import debounce from 'lodash/debounce';
 // WordPress default is 10
 export const PER_PAGE = '10';
 
-export async function handleFetchPosts(query, params = '') {
+export async function fetchPosts(query, params = '') {
   try {
     // use try block to test if the request is sucessful
     const res = await fetch(
@@ -13,23 +13,22 @@ export async function handleFetchPosts(query, params = '') {
     const newPosts = await res.json();
     const newPages = res.headers.get('x-wp-totalpages');
 
-    return { newPosts, newPages };
+    return {
+      newPosts,
+      newPages
+    };
   } catch (err) {
     console.log(err);
   }
 }
 
-export function debounceRequestPosts(query, params) {
-  return debounce(() => handleFetchPosts(query, params), 500, {
+export function debounceFetchPosts(query, params) {
+  return debounce(() => fetchPosts(query, params), 500, {
     leading: true
   })();
 }
 
-export async function handleSearchByFilter(
-  value,
-  filteredBy,
-  pageParam = false
-) {
+export async function fetchFilteredPosts(value, filteredBy, pageParam = '') {
   let newByCategory = {
     newPosts: [],
     newPages: 0
@@ -41,17 +40,17 @@ export async function handleSearchByFilter(
 
   // only make request for categories if filtering by category
   if (filteredBy.categories.length > 0) {
-    newByCategory = await handleFetchPosts(
+    newByCategory = await fetchPosts(
       value,
-      `&_embed&categories=${filteredBy.categories}${pageParam ? pageParam : ''}`
+      `&_embed&categories=${filteredBy.categories}${pageParam}`
     );
   }
 
   // only make request for tags if filtering by tag
   if (filteredBy.tags.length > 0) {
-    newByTag = await handleFetchPosts(
+    newByTag = await fetchPosts(
       value,
-      `&_embed&tags=${filteredBy.tags}${pageParam ? pageParam : ''}`
+      `&_embed&tags=${filteredBy.tags}${pageParam}`
     );
   }
 
@@ -59,9 +58,9 @@ export async function handleSearchByFilter(
     filteredBy.categories.length === 0 && filteredBy.tags.length === 0;
 
   if (allFiltersRemoved) {
-    const { newPosts, newPages } = await handleFetchPosts(
+    const { newPosts, newPages } = await fetchPosts(
       value,
-      `&_embed${pageParam ? pageParam : ''}`
+      `&_embed${pageParam}`
     );
 
     return {

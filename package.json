@@ -13,8 +13,8 @@
     "start": "npm-run-all --parallel browser-sync watch:css webpack",
     "format": "prettier --ignore-path .eslintignore \"**/*.+(js|json)\" --write",
     "lint": "eslint . --quiet",
-    "test": "jest",
-    "validate": "npm run test && lint-staged"
+    "test": "jest --watch",
+    "validate": "jest && lint-staged"
   },
   "dependencies": {
     "core-js": "^3.6.5",

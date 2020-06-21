@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { array, number } from 'prop-types';
 import SearchPagePosts from './SearchPagePosts';
-import { handleSearchByFilter } from '../services';
+import { fetchFilteredPosts } from '../services';
 import useEndlessScroll from './useEndlessScroll';
 import TermItem from './TermItem';
 
@@ -31,7 +31,7 @@ export default function SearchPage({
       newPosts,
       newPages,
       currentPage = false
-    } = await handleSearchByFilter(e.target.value, filteredBy);
+    } = await fetchFilteredPosts(e.target.value, filteredBy);
 
     setPosts(newPosts);
     setPages(newPages);
@@ -52,7 +52,7 @@ export default function SearchPage({
 
     setFilteredBy(filteredBy);
 
-    const { newPosts, newPages, currentPage } = await handleSearchByFilter(
+    const { newPosts, newPages, currentPage } = await fetchFilteredPosts(
       query,
       filteredBy
     );
@@ -121,11 +121,13 @@ export default function SearchPage({
         </div>
         <div className="col-md-8">
           {posts && posts.length > 0 ? (
-            <div className="na-cards">
+            <div className="na-cards" data-testid="search-page-posts">
               <SearchPagePosts posts={posts} />
-              <p className="text-center">
-                {loading && <i className="fa fa-spinner fa-spin fa-fw"></i>}
-              </p>
+              {loading && (
+                <p className="text-center">
+                  <i className="fa fa-spinner fa-spin fa-fw"></i>
+                </p>
+              )}
             </div>
           ) : (
             <div>No results found</div>
