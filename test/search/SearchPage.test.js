@@ -27,37 +27,77 @@ const setup = () => {
 
   const input = screen.getByRole('textbox');
   const postsContainer = screen.getByTestId('search-page-posts');
+  const firstTermButtons = screen.getAllByTestId('term-category-item');
 
   return {
     input,
     postsContainer,
+    categoryButton: firstTermButtons[0],
+    tagButton: firstTermButtons[1],
     ...utils
   };
 };
 
-test('loads posts based on query param', () => {
+test('load posts based on query param', () => {
   const { input } = setup();
 
   expect(input.value).toEqual('test');
 });
 
 test('loads posts when input value changes', async () => {
-  const { input, postsContainer, debug } = setup();
+  const { input, postsContainer } = setup();
 
   mockFetchFilteredPosts.mockResolvedValueOnce({
     newPosts: posts,
     newPages: 1
   });
 
-  expect(postsContainer.children.length).toEqual(1);
-
   fireEvent.change(input, {
     target: { value: '' }
   });
 
-  expect(mockFetchFilteredPosts).toHaveBeenCalledTimes(1);
+  await waitFor(() => {
+    expect(mockFetchFilteredPosts).toHaveBeenCalledWith('', {
+      categories: [],
+      tags: []
+    });
+    expect(postsContainer.children.length).toEqual(10);
+    expect(mockFetchFilteredPosts).toHaveBeenCalledTimes(1);
+  });
+});
+
+test('loads posts based on filter by category and then search', async () => {
+  const { input, postsContainer, categoryButton } = setup();
+  const searchValue = 'n-abler';
+
+  const postsByCategory = posts.filter(
+    post => post._embedded['wp:term'][0][0].term_id === 8
+  );
+
+  const postsByTitleAndCategory = postsByCategory.filter(post =>
+    post.title.rendered.toLowerCase().includes(searchValue)
+  );
+
+  mockFetchFilteredPosts.mockResolvedValueOnce({
+    newPosts: postsByCategory,
+    newPages: 1
+  });
+
+  fireEvent.click(categoryButton);
+
+  mockFetchFilteredPosts.mockResolvedValueOnce({
+    newPosts: postsByTitleAndCategory,
+    newPages: 1
+  });
+
+  fireEvent.change(input, {
+    target: {
+      value: searchValue
+    }
+  });
 
   await waitFor(() => {
-    expect(postsContainer.children.length).toEqual(10);
+    expect(postsContainer.children.length).toEqual(2);
+    expect(mockFetchFilteredPosts).toHaveBeenCalledTimes(3);
   });
 });
