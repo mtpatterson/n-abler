@@ -89,10 +89,11 @@ export default function SearchPage({
             />
             <div>
               <h2>Categories:</h2>
-              {categories.map(cat => {
+              {categories.map((cat, index) => {
                 return (
                   <TermItem
                     key={cat.term_id}
+                    index={index}
                     name={cat.cat_name}
                     count={cat.category_count}
                     handleFilterByTerm={() =>
@@ -104,10 +105,11 @@ export default function SearchPage({
             </div>
             <div>
               <h2>Tags:</h2>
-              {tags.map(tag => {
+              {tags.map((tag, index) => {
                 return (
                   <TermItem
                     key={tag.term_id}
+                    index={index}
                     name={tag.name}
                     count={tag.count}
                     handleFilterByTerm={() =>
