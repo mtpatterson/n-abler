@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { array, number } from 'prop-types';
 import SearchPagePosts from './SearchPagePosts';
 import { fetchFilteredPosts } from '../services';
@@ -14,31 +14,42 @@ export default function SearchPage({
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(window.location.search.split('=')[1]);
   const [pages, setPages] = useState(maxNumPages);
+  const [pagesCats, setPagesCats] = useState(1);
+  const [pagesTags, setPagesTags] = useState(1);
   const [filteredBy, setFilteredBy] = useState({ categories: [], tags: [] });
   const [posts, setPosts, setCurrentPage] = useEndlessScroll(
     initialPosts,
     query,
     pages,
+    pagesCats,
+    pagesTags,
     filteredBy,
     setLoading
   );
 
-  async function handleSearchInputChange(e) {
-    // set form input value
-    setQuery(e.target.value);
-
+  async function handleSearchFilter(target) {
     const {
       newPosts,
       newPages,
+      newPagesCats,
+      newPagesTags,
       currentPage = false
-    } = await fetchFilteredPosts(e.target.value, filteredBy);
-
+    } = await fetchFilteredPosts(target, filteredBy);
     setPosts(newPosts);
     setPages(newPages);
+    setPagesCats(newPagesCats);
+    setPagesTags(newPagesTags);
 
     if (currentPage) {
       setCurrentPage(currentPage);
     }
+  }
+
+  function handleSearchInputChange(e) {
+    // set form input value
+    setQuery(e.target.value);
+
+    handleSearchFilter(e.target.value);
   }
 
   async function handleFilterByTerm(term_id, type) {
@@ -52,17 +63,7 @@ export default function SearchPage({
 
     setFilteredBy(filteredBy);
 
-    const { newPosts, newPages, currentPage } = await fetchFilteredPosts(
-      query,
-      filteredBy
-    );
-
-    setPosts(newPosts);
-    setPages(newPages);
-
-    if (currentPage) {
-      setCurrentPage(currentPage);
-    }
+    handleSearchFilter(query);
   }
 
   return (
@@ -96,9 +97,10 @@ export default function SearchPage({
                     index={index}
                     name={cat.cat_name}
                     count={cat.category_count}
-                    handleFilterByTerm={() =>
-                      handleFilterByTerm(cat.term_id, 'categories')
-                    }
+                    handleFilterByTerm={() => {
+                      setCurrentPage(1);
+                      handleFilterByTerm(cat.term_id, 'categories');
+                    }}
                   />
                 );
               })}
@@ -112,9 +114,10 @@ export default function SearchPage({
                     index={index}
                     name={tag.name}
                     count={tag.count}
-                    handleFilterByTerm={() =>
-                      handleFilterByTerm(tag.term_id, 'tags')
-                    }
+                    handleFilterByTerm={() => {
+                      setCurrentPage(1);
+                      handleFilterByTerm(tag.term_id, 'tags');
+                    }}
                   />
                 );
               })}
@@ -123,14 +126,14 @@ export default function SearchPage({
         </div>
         <div className="col-md-8">
           {posts && posts.length > 0 ? (
-            <div className="na-cards" data-testid="search-page-posts">
-              <SearchPagePosts posts={posts} />
-              {loading && (
-                <p className="text-center">
-                  <i className="fa fa-spinner fa-spin fa-fw"></i>
-                </p>
-              )}
-            </div>
+            <Fragment>
+              <div className="na-cards" data-testid="search-page-posts">
+                <SearchPagePosts posts={posts} />
+              </div>
+              <p className="text-center">
+                {loading && <i className="fa fa-spinner fa-spin fa-fw"></i>}
+              </p>
+            </Fragment>
           ) : (
             <div>No results found</div>
           )}

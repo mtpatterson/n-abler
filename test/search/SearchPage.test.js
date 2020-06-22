@@ -1,4 +1,5 @@
 import React from 'react';
+import uniqBy from 'lodash/uniqBy';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import SearchPage from '@frontend/search/SearchPage';
 import { fetchFilteredPosts as mockFetchFilteredPosts } from '@frontend/services';
@@ -63,6 +64,8 @@ test('loads posts when input value changes', async () => {
     });
     expect(postsContainer.children.length).toEqual(10);
     expect(mockFetchFilteredPosts).toHaveBeenCalledTimes(1);
+
+    mockFetchFilteredPosts.mockClear();
   });
 });
 
@@ -98,6 +101,61 @@ test('loads posts based on filter by category and then search', async () => {
 
   await waitFor(() => {
     expect(postsContainer.children.length).toEqual(2);
+    expect(mockFetchFilteredPosts).toHaveBeenCalledTimes(2);
+
+    mockFetchFilteredPosts.mockClear();
+  });
+});
+
+test('loads posts based on filter by category, tag, and then search', async () => {
+  const { input, postsContainer, categoryButton, tagButton, debug } = setup();
+  const searchValue = 'n-abler';
+
+  const postsByCategory = posts.filter(
+    post => post._embedded['wp:term'][0][0].term_id === 8
+  );
+
+  const postsByTag = posts.filter(post => {
+    const byTag = post._embedded['wp:term'][1][0];
+
+    if (byTag) {
+      return byTag.term_id === 5;
+    }
+  });
+
+  const postsByTitle = posts.filter(post =>
+    post.title.rendered.toLowerCase().includes(searchValue)
+  );
+
+  mockFetchFilteredPosts.mockResolvedValueOnce({
+    newPosts: postsByCategory,
+    newPages: 1
+  });
+
+  mockFetchFilteredPosts.mockResolvedValueOnce({
+    newPosts: uniqBy(postsByCategory.concat(postsByTag), 'id'),
+    newPages: 1
+  });
+
+  mockFetchFilteredPosts.mockResolvedValueOnce({
+    newPosts: uniqBy(postsByCategory.concat(postsByTag, postsByTitle), 'id'),
+    newPages: 1
+  });
+
+  fireEvent.click(categoryButton);
+
+  fireEvent.click(tagButton);
+
+  fireEvent.change(input, {
+    target: {
+      value: searchValue
+    }
+  });
+
+  await waitFor(() => {
+    expect(postsContainer.children.length).toEqual(6);
     expect(mockFetchFilteredPosts).toHaveBeenCalledTimes(3);
+
+    mockFetchFilteredPosts.mockClear();
   });
 });

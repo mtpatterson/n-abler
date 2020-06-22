@@ -27,11 +27,11 @@ export const posts = [
         ],
         [
           {
-            term_id: 6,
-            name: 'Cutlery',
-            slug: 'cutlery',
+            term_id: 5,
+            name: 'Carpentry',
+            slug: 'carpentry',
             term_group: 0,
-            term_taxonomy_id: 6,
+            term_taxonomy_id: 5,
             taxonomy: 'post_tag',
             description: '',
             parent: 0,
@@ -65,6 +65,24 @@ export const posts = [
             category_description: '',
             cat_name: 'Uncategorized',
             category_nicename: 'uncategorized',
+            category_parent: 0
+          },
+          {
+            term_id: 8,
+            name: 'Kitchen',
+            slug: 'kitchen',
+            term_group: 0,
+            term_taxonomy_id: 8,
+            taxonomy: 'category',
+            description: '',
+            parent: 0,
+            count: 3,
+            filter: 'raw',
+            cat_ID: 8,
+            category_count: 3,
+            category_description: '',
+            cat_name: 'Kitchen',
+            category_nicename: 'kitchen',
             category_parent: 0
           }
         ],
@@ -111,7 +129,20 @@ export const posts = [
             category_parent: 0
           }
         ],
-        false
+        [
+          {
+            term_id: 5,
+            name: 'Carpentry',
+            slug: 'carpentry',
+            term_group: 0,
+            term_taxonomy_id: 5,
+            taxonomy: 'post_tag',
+            description: '',
+            parent: 0,
+            count: 2,
+            filter: 'raw'
+          }
+        ]
       ]
     }
   },
