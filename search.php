@@ -50,7 +50,7 @@ get_footer(); ?>
 	// this creates a React app
 	_NA.search.initSearchPage({
 		posts: <?php echo json_encode($initial_posts); ?>,
-		categories: <?php echo json_encode(get_categories()) ?>,
+		categories: <?php echo json_encode(get_categories('exclude=1')) ?>,
 		tags: <?php echo json_encode(get_tags()) ?>,
 		maxNumPages: <?php echo json_encode($wp_query->max_num_pages); ?>
 	});

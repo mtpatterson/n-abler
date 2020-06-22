@@ -1,4 +1,5 @@
 import debounce from 'lodash/debounce';
+import uniqBy from 'lodash/uniqBy';
 
 // WordPress default is 10
 export const PER_PAGE = '10';
@@ -28,7 +29,12 @@ export function debounceFetchPosts(query, params) {
   })();
 }
 
-export async function fetchFilteredPosts(value, filteredBy, pageParam = '') {
+export async function fetchFilteredPosts(
+  value,
+  filteredBy,
+  pageParam = '',
+  scrollingType
+) {
   let newByCategory = {
     newPosts: [],
     newPages: 0
@@ -38,20 +44,40 @@ export async function fetchFilteredPosts(value, filteredBy, pageParam = '') {
     newPages: 0
   };
 
-  // only make request for categories if filtering by category
-  if (filteredBy.categories.length > 0) {
-    newByCategory = await fetchPosts(
-      value,
-      `&_embed&categories=${filteredBy.categories}${pageParam}`
-    );
-  }
+  if (scrollingType) {
+    if (scrollingType === 'cats') {
+      // only make request for categories if filtering by category
+      newByCategory = await fetchPosts(
+        value,
+        `&_embed&categories=${filteredBy.categories}${pageParam}`
+      );
+    }
 
-  // only make request for tags if filtering by tag
-  if (filteredBy.tags.length > 0) {
-    newByTag = await fetchPosts(
-      value,
-      `&_embed&tags=${filteredBy.tags}${pageParam}`
-    );
+    // only make request for tags if filtering by tag
+    if (scrollingType === 'tags') {
+      newByTag = await fetchPosts(
+        value,
+        `&_embed&tags=${filteredBy.tags}${pageParam}`
+      );
+    }
+  } else {
+    if (filteredBy.categories.length > 0) {
+      // only make request for categories if filtering by category
+      newByCategory = await fetchPosts(
+        value,
+        `&_embed&categories=${filteredBy.categories}${pageParam}`
+      );
+    }
+
+    // only make request for tags if filtering by tag
+    if (filteredBy.tags.length > 0) {
+      console.log('hola hola');
+
+      newByTag = await fetchPosts(
+        value,
+        `&_embed&tags=${filteredBy.tags}${pageParam}`
+      );
+    }
   }
 
   const allFiltersRemoved =
@@ -66,12 +92,16 @@ export async function fetchFilteredPosts(value, filteredBy, pageParam = '') {
     return {
       newPosts,
       newPages,
+      newPagesCats: newPages,
+      newPagesTags: newPages,
       currentPage: 1
     };
   } else {
     return {
-      newPosts: newByCategory.newPosts.concat(newByTag.newPosts),
-      newPages: Number(newByCategory.newPages) + newByTag.newPages,
+      newPosts: uniqBy(newByCategory.newPosts.concat(newByTag.newPosts), 'id'),
+      newPages: 1,
+      newPagesCats: Number(newByCategory.newPages),
+      newPagesTags: Number(newByTag.newPages),
       currentPage: false
     };
   }

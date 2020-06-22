@@ -8,7 +8,7 @@
     "browser-sync": "browser-sync start --proxy 'n-abler.localhost' --watch --files '**/*.php, dist/**/*' --no-notify",
     "prefix:css": "postcss dist/*.css --use=autoprefixer --dir=dist",
     "build:css": "sass --style=expanded src/scss:dist",
-    "watch:css": "onchange 'src/scss/**/*.scss' -- npm run build:css",
+    "watch:css": "npm run build:css && onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -d --watch",
     "start": "npm-run-all --parallel browser-sync watch:css webpack",
     "format": "prettier --ignore-path .eslintignore \"**/*.+(js|json)\" --write",
