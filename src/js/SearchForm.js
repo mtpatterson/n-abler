@@ -27,9 +27,13 @@ export default function SearchForm({ postReq }) {
     // set form input value
     setQuery(e.target.value);
 
-    if (query.trim('').length < 2) {
+    if (e.target.value.length === 0) {
+      setPosts(null);
+    }
+
+    if (e.target.value.length <= 2) {
       // search after 2 characters
-      return setPosts({});
+      return;
     }
 
     // handle request and set value
