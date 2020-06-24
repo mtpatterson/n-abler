@@ -5,7 +5,7 @@
   "description": "n-abler.org main theme",
   "author": "Brandon Patterson",
   "scripts": {
-    "browser-sync": "browser-sync start --proxy 'n-abler.localhost' --watch --files '**/*.php, dist/**/*' --no-notify",
+    "browser-sync": "browser-sync start --proxy 'n-abler.localhost' --watch --files '**/*.php, dist/**/*' --no-notify --plugins='bs-eslint-message'",
     "prefix:css": "postcss dist/*.css --use=autoprefixer --dir=dist",
     "build:css": "sass --style=expanded src/scss:dist",
     "watch:css": "npm run build:css && onchange 'src/scss/**/*.scss' -- npm run build:css",
@@ -32,6 +32,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.26.7",
+    "bs-eslint-message": "0.0.3",
     "eslint": "^7.3.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-loader": "^4.0.2",

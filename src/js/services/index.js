@@ -71,8 +71,6 @@ export async function fetchFilteredPosts(
 
     // only make request for tags if filtering by tag
     if (filteredBy.tags.length > 0) {
-      console.log('hola hola');
-
       newByTag = await fetchPosts(
         value,
         `&_embed&tags=${filteredBy.tags}${pageParam}`

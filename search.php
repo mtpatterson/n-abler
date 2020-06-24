@@ -37,7 +37,7 @@ get_header();
 		<main id="main" class="site-main">
 
 			<!-- container for React app -->
-			<div class="na-search-page js-search-page">Loading...</div>
+			<div class="na-search-page js-search-page"></div>
 
 		</main><!-- #main -->
 	</section><!-- #primary -->
