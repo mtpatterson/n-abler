@@ -13,7 +13,7 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 
-			<div class="py-4 px-5 rounded shadow container bg-white">
+			<div class="pt-4 pb-5 px-5 rounded shadow container bg-white">
 				<a class="text-muted" href="/?s=">« Back to Search</a>
 				<?php
 				while ( have_posts() ) :
