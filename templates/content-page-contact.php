@@ -51,22 +51,23 @@ if(isset($_POST['submitted'])) {
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header my-4">
-		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-	</header><!-- .entry-header -->
-
     <div class="entry-content">
-        <!-- custom message -->
-        <?php the_content(); ?>
-
         <?php if ($emailSent) : ?>
-            <h2>Thank you for contacting us!</h2>
+            <header class="entry-header my-4">
+                <h1>Thank you for contacting us!</h1>
+            </header><!-- .entry-header -->
             <p>We will be in touch with you shortly.</p>
-            <br />
             <div>
                 In the mean time, take a look at our <a href="/?s=">Catalog</a>.
             </div>
         <?php else : ?>
+            <header class="entry-header my-4">
+                <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+            </header><!-- .entry-header -->
+
+            <!-- custom message -->
+            <?php the_content(); ?>
+
             <form action="<?php the_permalink(); ?>" id="contactForm" method="post">
                 <input type="hidden" name="submitted" id="submitted" value="true" />
                 <div class="form-group">
