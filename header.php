@@ -14,8 +14,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Manufacturers of Upper Extremity Components for Persons with Hand Dysfunction and Amputation" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="og:image" content="">
+	<meta name="og:site_name": content="N-Abler">
+	<meta name="og:title": content="N-Abler">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
 	<?php wp_head(); ?>
 </head>
 
