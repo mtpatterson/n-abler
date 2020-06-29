@@ -14,7 +14,6 @@
 
 get_header();
 ?>
-
 	<div id="primary" class="content-area pt-5">
 		<main id="main" class="site-main pt-4 pb-5 px-5 rounded shadow container bg-white">
 
@@ -22,7 +21,7 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			get_template_part( 'templates/content', 'page' );
+			get_template_part( 'templates/content', 'page-contact' );
 
 		endwhile; // End of the loop.
 		?>
