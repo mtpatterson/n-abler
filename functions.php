@@ -149,6 +149,10 @@ function page_scripts() {
 	foreach ($pages as $page) {
 		$title = strtolower($page->post_title);
 
+		if ($title == 'home') {
+			wp_enqueue_style("swiper_css", "https://unpkg.com/swiper/css/swiper.min.css", array(), THEME_VERSION);
+		}
+
 		if (is_page($title)) {
 			// page by title
 			wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);

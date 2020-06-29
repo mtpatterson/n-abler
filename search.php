@@ -10,8 +10,7 @@ global $wp_query;
 
 $initial_posts = [];
 
-while ( have_posts() ) :
-	the_post();
+while ( have_posts() ) : the_post();
 
 	// add data from WordPress to an array
 	array_push($initial_posts, array(
@@ -26,7 +25,6 @@ while ( have_posts() ) :
 				get_the_tags()
 			)
 		),
-
 	));
 
 endwhile;

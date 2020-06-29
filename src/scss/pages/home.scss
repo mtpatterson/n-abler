@@ -1,1 +1,10 @@
 @import '../base/variables';
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: $black;
+}
+
+.swiper-pagination-bullet-active {
+  background: $black;
+}

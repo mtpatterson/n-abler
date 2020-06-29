@@ -1,3 +1,10 @@
+.swiper-button-prev,
+.swiper-button-next {
+  color: #000;
+}
 
+.swiper-pagination-bullet-active {
+  background: #000;
+}
 
 /*# sourceMappingURL=home.css.map */
