@@ -92,4 +92,14 @@ li {
   min-height: 100vh;
 }
 
+.na-single-image {
+  width: 520px;
+  max-width: 100%;
+}
+
+.na-single-container {
+  padding: 50px;
+  border: 1px solid #ddd;
+}
+
 /*# sourceMappingURL=style.css.map */
