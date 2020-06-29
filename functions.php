@@ -155,8 +155,13 @@ function page_scripts() {
 
 		if (is_page($title)) {
 			// page by title
-			wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);
-			wp_enqueue_style("{$title}_css", "/wp-content/themes/n-abler/dist/pages/{$title}.css", array(), THEME_VERSION);
+			if (file_exists("/wp-content/themes/n-abler/dist/{$title}.js")) {
+				wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);
+			}
+
+			if (file_exists("/wp-content/themes/n-abler/dist/pages/{$title}.css")) {
+				wp_enqueue_style("{$title}_css", "/wp-content/themes/n-abler/dist/pages/{$title}.css", array(), THEME_VERSION);
+			}
 		} else if (is_search()) {
 			// search page
 			wp_enqueue_script("search_js", "/wp-content/themes/n-abler/dist/search.js", array(), THEME_VERSION, true);

@@ -10,20 +10,15 @@
 get_header();
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
+	<div id="primary" class="content-area content-area pt-5">
+		<main id="main" class="site-main pt-4 pb-5 px-5 rounded shadow container bg-white">
 
-			<div class="pt-4 pb-5 px-5 rounded shadow container bg-white">
-				<a class="text-muted" href="/?s=">« Back to Search</a>
-				<?php
-				while ( have_posts() ) :
-					the_post();
+			<?php while ( have_posts() ) :
+				the_post();
 
-					get_template_part( 'templates/content', get_post_type() );
+				get_template_part( 'templates/content', get_post_type() );
 
-				endwhile; // End of the loop.
-				?>
-			</div>
+			endwhile; ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
