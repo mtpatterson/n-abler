@@ -84,6 +84,17 @@ li {
   margin-bottom: 0;
 }
 
+.site-footer {
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+.site-footer a {
+  color: #000;
+}
+
 .hidden {
   display: none;
 }

@@ -8,6 +8,7 @@ export default function useEndlessScroll(
   pagesCats,
   pagesTags,
   filteredBy,
+  loading,
   setLoading
 ) {
   const [prevQuery, setPrevQuery] = useState(query);
@@ -27,7 +28,7 @@ export default function useEndlessScroll(
     async function handleGetNewPage(pages, current, setCurrent, scrollingType) {
       const nextPage = current + 1;
 
-      if (nextPage <= pages) {
+      if (!loading && nextPage <= pages) {
         setCurrent(nextPage);
         setPrevQuery(query);
         setLoading(true);
@@ -45,7 +46,10 @@ export default function useEndlessScroll(
     }
 
     function listenForBottom() {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
         if (
           filteredBy.categories.length === 0 &&
           filteredBy.categories.length === 0
