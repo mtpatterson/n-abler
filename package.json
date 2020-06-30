@@ -11,6 +11,7 @@
     "watch:css": "npm run build:css && onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -d --watch",
     "start": "npm-run-all --parallel browser-sync watch:css webpack",
+    "build": "npm run build:css && npm run webpack",
     "format": "prettier --ignore-path .eslintignore \"**/*.+(js|json)\" --write",
     "lint": "eslint . --quiet",
     "test": "jest --watch",

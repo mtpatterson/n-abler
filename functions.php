@@ -151,6 +151,8 @@ function page_scripts() {
 
 		if ($title == 'home') {
 			wp_enqueue_style("swiper_css", "https://unpkg.com/swiper/css/swiper.min.css", array(), THEME_VERSION);
+			wp_enqueue_script("home_js", "/wp-content/themes/n-abler/dist/home.js", array(), THEME_VERSION, true);
+			wp_enqueue_style("home_css", "/wp-content/themes/n-abler/dist/pages/home.css", array(), THEME_VERSION);
 		}
 
 		if (is_page($title)) {
