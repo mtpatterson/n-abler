@@ -14,10 +14,28 @@
 
 </div><!-- #content -->
 
-<footer id="colophon" class="site-footer">
-	<div class="site-info"></div><!-- .site-info -->
-</footer><!-- #colophon -->
 </div><!-- #page -->
+
+<footer id="colophon" class="site-footer">
+	<div class="site-info row">
+		<ul>
+			<li>
+				<a href="/n-abler">N-Abler</a>
+			</li>
+			<li>
+				<a href="/search">Search</a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="/contact">Contact</a>
+			</li>
+			<li>
+				<a href="/about">About</a>
+			</li>
+		</ul>
+	</div><!-- .site-info -->
+</footer><!-- #colophon -->
 
 <?php wp_footer(); ?>
 

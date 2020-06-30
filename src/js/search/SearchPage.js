@@ -24,6 +24,7 @@ export default function SearchPage({
     pagesCats,
     pagesTags,
     filteredBy,
+    loading,
     setLoading
   );
 

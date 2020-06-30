@@ -8,3 +8,9 @@
 .swiper-pagination-bullet-active {
   background: $black;
 }
+
+.swiper-container {
+  img {
+    max-width: 100%;
+  }
+}
