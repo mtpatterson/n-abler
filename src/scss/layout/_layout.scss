@@ -2,10 +2,6 @@
   display: none;
 }
 
-.full-page {
-  min-height: 100vh;
-}
-
 .na-single-image {
   width: 520px;
   max-width: 100%;
@@ -14,4 +10,8 @@
 .na-single-container {
   padding: 50px;
   border: 1px solid $gray;
+}
+
+.na-navbar-brand {
+  display: flex;
 }

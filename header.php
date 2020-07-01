@@ -27,13 +27,24 @@
 
 	<header id="masthead" class="site-header">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="navbar-brand">
+			<div class="na-navbar-brand navbar-brand">
+				<div>
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-toggle="collapse"
+						data-target="#navbarItems"
+						aria-controls="navbarItems"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
 				<?php the_custom_logo(); ?>
 			</div>
 
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarItems" aria-controls="navbarItems" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<?php get_template_part( 'templates/partials/search', 'form' ); ?>
 
 			<div class="collapse navbar-collapse">
 				<?php /* Primary navigation */
@@ -48,9 +59,10 @@
 						'walker'          => new WP_Bootstrap_Navwalker(),
 					) );
 				?>
-				<?php get_template_part( 'templates/partials/search', 'form' ); ?>
 			</div>
+
 		</nav>
+
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content bg-light full-page">
