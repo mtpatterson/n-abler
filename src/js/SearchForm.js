@@ -50,11 +50,6 @@ export default function SearchForm({ postReq }) {
     }
   }
 
-  function handlePostsClick(titleRendered) {
-    setQuery(titleRendered);
-    setSubmit(true);
-  }
-
   function handlePostsKeyDown(e) {
     if (e.key === 'ArrowDown' && firstResultRef.current) {
       e.preventDefault();
@@ -108,7 +103,6 @@ export default function SearchForm({ postReq }) {
       {posts && (
         <SearchDropdownPosts
           posts={posts}
-          onClick={handlePostsClick}
           onKeyDown={handlePostsKeyDown}
           firstResultRef={firstResultRef}
         />
