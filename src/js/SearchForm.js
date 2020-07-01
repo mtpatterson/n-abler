@@ -77,20 +77,27 @@ export default function SearchForm({ postReq }) {
         className="na-search-form form-inline my-2 my-lg-0"
         autoComplete="off"
       >
-        <input
-          ref={inputRef}
-          className="form-control mr-sm-2"
-          type="search"
-          name="s"
-          placeholder="Search"
-          aria-label="Search"
-          value={query}
-          onChange={handleInputChange}
-          onKeyDown={onInputKeydown}
-        />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button>
+        <div className="input-group na-search-group">
+          <input
+            ref={inputRef}
+            className="form-control na-search-input"
+            type="search"
+            name="s"
+            placeholder="Search"
+            aria-label="Search"
+            value={query}
+            onChange={handleInputChange}
+            onKeyDown={onInputKeydown}
+          />
+          <div className="input-group-append">
+            <button
+              type="submit"
+              className="btn btn-outline-success my-2 my-sm-0"
+            >
+              <i className="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
       </form>
       {posts && (
         <SearchDropdownPosts

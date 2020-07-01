@@ -6,4 +6,4 @@ if (is_search()):
     $input_value = urlencode( get_query_var( 's' ) );
 endif; ?>
 
-<div class="js-search-form-navbar" data-value="<?= $input_value ?>"></div>
+<div class="js-search-form-navbar order-md-12" data-value="<?= $input_value ?>"></div>

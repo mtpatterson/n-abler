@@ -1,7 +1,16 @@
 // search form
 .na-search-form {
   position: relative;
-  max-width: 277.61px;
+}
+
+.na-search-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.na-search-input {
+  height: 38px;
 }
 
 .na-search-dropdown {
