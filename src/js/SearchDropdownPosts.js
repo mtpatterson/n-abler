@@ -1,7 +1,7 @@
 import React from 'react';
 import { array, func, object } from 'prop-types';
 
-function SearchDropdownPosts({ posts, firstResultRef }) {
+function SearchDropdownPosts({ posts, onKeyDown, firstResultRef }) {
   return (
     <div className="na-search-dropdown">
       {posts.length > 0 ? (
@@ -10,6 +10,7 @@ function SearchDropdownPosts({ posts, firstResultRef }) {
             <a
               href={slug}
               className="na-search-dropdown-item btn"
+              onKeyDown={onKeyDown}
               ref={index === 0 ? firstResultRef : null}
               key={slug}
             >
@@ -26,6 +27,7 @@ function SearchDropdownPosts({ posts, firstResultRef }) {
 
 SearchDropdownPosts.propTypes = {
   posts: array.isRequired,
+  onKeyDown: func.isRequired,
   firstResultRef: object
 };
 
