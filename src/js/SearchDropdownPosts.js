@@ -1,23 +1,20 @@
 import React from 'react';
 import { array, func, object } from 'prop-types';
 
-function SearchDropdownPosts({ posts, onClick, onKeyDown, firstResultRef }) {
+function SearchDropdownPosts({ posts, firstResultRef }) {
   return (
     <div className="na-search-dropdown">
       {posts.length > 0 ? (
         posts.map(({ slug, title }, index) => {
           return (
-            <button
-              type="button"
+            <a
+              href={slug}
               className="na-search-dropdown-item btn"
-              title={title.rendered}
-              onClick={() => onClick(title.rendered)}
-              onKeyDown={onKeyDown}
               ref={index === 0 ? firstResultRef : null}
               key={slug}
             >
               {title.rendered}
-            </button>
+            </a>
           );
         })
       ) : (
@@ -29,8 +26,6 @@ function SearchDropdownPosts({ posts, onClick, onKeyDown, firstResultRef }) {
 
 SearchDropdownPosts.propTypes = {
   posts: array.isRequired,
-  onClick: func.isRequired,
-  onKeyDown: func.isRequired,
   firstResultRef: object
 };
 
