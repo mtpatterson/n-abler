@@ -44,6 +44,8 @@ export default function SearchForm({ postReq }) {
 
   function onInputKeydown(e) {
     if (e.key === 'ArrowDown' && firstResultRef.current) {
+      e.preventDefault();
+
       firstResultRef.current.focus();
     }
   }
@@ -55,10 +57,14 @@ export default function SearchForm({ postReq }) {
 
   function handlePostsKeyDown(e) {
     if (e.key === 'ArrowDown' && firstResultRef.current) {
+      e.preventDefault();
+
       if (e.target.nextElementSibling) {
         e.target.nextElementSibling.focus();
       }
     } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+
       if (e.target.previousElementSibling) {
         e.target.previousElementSibling.focus();
       } else {
