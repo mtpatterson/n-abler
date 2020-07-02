@@ -16,7 +16,7 @@ get_header();
 ?>
 
 	<div id="primary" class="content-area pt-5">
-		<main id="main" class="site-main pt-4 pb-5 px-5 rounded shadow container bg-white">
+		<main id="main" class="site-main pt-4 pb-5 px-5 rounded border container bg-white">
 
 		<?php
 		while ( have_posts() ) :

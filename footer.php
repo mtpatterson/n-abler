@@ -17,7 +17,7 @@
 </div><!-- #page -->
 
 <footer id="colophon" class="site-footer">
-    <div class="bg-light">
+    <div class="bg-light mt-5">
         <div class="na-break-section">
             <section class="row">
                 <div class="col-xs-12 col-md-4">

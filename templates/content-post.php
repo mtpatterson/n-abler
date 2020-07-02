@@ -10,22 +10,16 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header my-4">
-		<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
-	</header><!-- .entry-header -->
-
-	<div class="entry-content row">
-		<div class="col-12 col-xl-6 text-center">
-			<img
-				class="na-single-image"
-				src="<?php echo get_the_post_thumbnail_url(null, array('768', '576')) ?>"
-				alt="<?php the_title(); ?>"
-			>
+<article class="na-image-container pb-5" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="container mb-5">
+		<div class="row na-image-text-container">
+			<div class="col-xs-12  col-md-6 mb-4">
+				<img src="<?php echo get_the_post_thumbnail_url(null, array('768', '576')) ?>" alt="<?php the_title(); ?>">
+			</div>
+			<div class="col-xs-12 col-md-6 p-5">
+				<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+				<?php the_content(); ?>
+			</div>
 		</div>
-		<div class="col-12 col-xl-6 p-4">
-			<?php the_content(); ?>
-		</div>
-	</div><!-- .entry-content -->
-
-</article><!-- #post-<?php the_ID(); ?> -->
+	</div>
+</article>

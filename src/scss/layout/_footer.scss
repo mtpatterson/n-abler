@@ -1,7 +1,9 @@
 .site-footer {
+  display: flex;
+  flex-direction: column;
+
   .na-break-section {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    margin: 30px auto;
   }
 }
 
