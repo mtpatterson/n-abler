@@ -32,6 +32,3 @@ get_header();
 <?php
 get_sidebar();
 get_footer(); ?>
-<script type="text/javascript">
-	_NA.home.initSwiper();
-</script>
