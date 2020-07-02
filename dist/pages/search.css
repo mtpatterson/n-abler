@@ -9,6 +9,7 @@
   flex-basis: 49%;
   height: 300px;
   margin: 2px;
+  max-width: 224px;
 }
 @media (min-width: 992px) {
   .na-card {

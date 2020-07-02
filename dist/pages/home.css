@@ -1,14 +1,25 @@
-.swiper-button-prev,
-.swiper-button-next {
-  color: #000;
+.home .jumbotron {
+  max-width: 800px;
+  margin: 0 auto;
+}
+@media (min-width: 992px) {
+  .home .na-home-title {
+    font-size: 55px;
+  }
 }
 
-.swiper-pagination-bullet-active {
-  background: #000;
+.na-break-section {
+  margin: 100px auto;
+}
+@media (min-width: 992px) {
+  .na-break-section {
+    max-width: 1140px;
+  }
 }
 
-.swiper-container img {
-  max-width: 100%;
+.na-break-line {
+  width: 150px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=home.css.map */

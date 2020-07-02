@@ -1,3 +1,17 @@
+// navbar
+.navbar {
+  background: $dark;
+  font-size: 14px;
+
+  a {
+    font-size: 14px;
+  }
+}
+
+.na-custom-logo-container {
+  height: 92px !important;
+}
+
 // search form
 .na-search-form {
   position: relative;
