@@ -91,10 +91,7 @@ export default function SearchForm({ postReq }) {
             onKeyDown={onInputKeydown}
           />
           <div className="input-group-append">
-            <button
-              type="submit"
-              className="btn btn-outline-success my-2 my-sm-0"
-            >
+            <button type="submit" className="btn btn-warning my-2 my-sm-0">
               <i className="fa fa-search"></i>
             </button>
           </div>

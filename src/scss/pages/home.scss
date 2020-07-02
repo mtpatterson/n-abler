@@ -1,16 +1,27 @@
 @import '../base/variables';
 
-.swiper-button-prev,
-.swiper-button-next {
-  color: $black;
-}
-
-.swiper-pagination-bullet-active {
-  background: $black;
-}
-
-.swiper-container {
-  img {
-    max-width: 100%;
+.home {
+  .jumbotron {
+    max-width: 800px;
+    margin: 0 auto;
   }
+
+  .na-home-title {
+    @media #{$medium} {
+      font-size: 55px;
+    }
+  }
+}
+
+.na-break-section {
+  margin: 100px auto;
+
+  @media #{$medium} {
+    max-width: 1140px;
+  }
+}
+
+.na-break-line {
+  width: 150px;
+  margin: 0 auto;
 }

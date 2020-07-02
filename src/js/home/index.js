@@ -1,7 +1,7 @@
 import Swiper from 'swiper';
 
 export function initSwiper() {
-  new Swiper('.swiper-container', {
+  new Swiper('.js-swiper-container', {
     loop: true,
 
     autoplay: {

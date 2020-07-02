@@ -26,9 +26,9 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', '_s' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-dark">
 			<div class="na-navbar-brand navbar-brand">
-				<div>
+				<div style="position: absolute;">
 					<button
 						class="navbar-toggler"
 						type="button"
@@ -41,7 +41,9 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 				</div>
-				<?php the_custom_logo(); ?>
+				<div class="na-custom-logo-container">
+					<?php the_custom_logo(); ?>
+				</div>
 			</div>
 
 			<?php get_template_part( 'templates/partials/search', 'form' ); ?>
@@ -65,4 +67,4 @@
 
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content bg-light full-page">
+	<div id="content" class="site-content full-page">
