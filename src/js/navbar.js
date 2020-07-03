@@ -34,8 +34,15 @@ function hideDropdown(dropdown) {
 
 // toggle dropdowns
 dropdowns.forEach(dropdown => {
-  dropdown.addEventListener('mouseenter', e => showDropdown(e.target));
-  dropdown.addEventListener('mouseleave', e => hideDropdown(e.target));
+  dropdown.addEventListener('mouseenter', e => showDropdown(e.currentTarget));
+  dropdown.addEventListener('mouseleave', e => hideDropdown(e.currentTarget));
+  dropdown.addEventListener('keydown', e => {
+    if (e.keyCode === 13 || e.keyCode === 40) {
+      e.preventDefault();
+
+      showDropdown(e.currentTarget);
+    }
+  });
 });
 
 document.addEventListener('click', e => {

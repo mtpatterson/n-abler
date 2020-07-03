@@ -8,18 +8,17 @@
   }
 }
 
-.na-break-section {
-  margin: 100px auto;
+.jumbotron {
+  padding: 2rem 0;
 }
 @media (min-width: 992px) {
-  .na-break-section {
-    max-width: 1140px;
+  .jumbotron {
+    padding: 50px;
   }
 }
 
-.na-break-line {
-  width: 150px;
-  margin: 0 auto;
+.jumbotron-inner {
+  padding: 50px;
 }
 
 /*# sourceMappingURL=home.css.map */

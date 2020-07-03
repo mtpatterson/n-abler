@@ -65,6 +65,8 @@ export default function SearchForm({ postReq }) {
       } else {
         inputRef.current.focus();
       }
+    } else if (e.key === 'Escape') {
+      inputRef.current.focus();
     }
   }
 
@@ -91,7 +93,12 @@ export default function SearchForm({ postReq }) {
             onKeyDown={onInputKeydown}
           />
           <div className="input-group-append">
-            <button type="submit" className="btn btn-warning my-2 my-sm-0">
+            <button
+              type="submit"
+              className="btn btn-warning my-2 my-sm-0"
+              aria-label="Search"
+              title="Search"
+            >
               <i className="fa fa-search"></i>
             </button>
           </div>

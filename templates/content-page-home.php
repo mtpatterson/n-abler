@@ -10,27 +10,30 @@
 $image_1 = get_field('image_1');
 $image_2 = get_field('image_2');
 $image_3 = get_field('image_3');
-
 ?>
 
 <div class="na-home-container">
     <section class="container mb-5">
         <div class="jumbotron">
-            <h1 class="na-home-title">Texas Assistive Devices</h1>
-            <p>Manufacturers of Upper Extremity Components for Persons with Hand Dysfunction and Amputation</p>
-            <p class="text-right"><a href="/?s=" class="btn btn-warning">Search Now</a></p>
+            <div class="jumbotron-inner">
+                <h1 class="na-home-title">Texas Assistive Devices</h1>
+                <p>Manufacturers of Upper Extremity Components for Persons with Hand Dysfunction and Amputation</p>
+                <p class="text-right"><a href="/?s=" class="btn btn-warning">Search Now</a></p>
+            </div>
         </div>
     </section>
 
     <section class="bg-light na-image-container">
         <div class="container mb-5">
             <div class="row na-image-text-container">
-                <div class="col-xs-12  col-md-6 mb-4">
-                    <img src="<?= $image_1['url'] ?>" alt="<?= $image_1['alt'] ?>" />
+                <div class="col-xs-12 col-md-6 mb-4">
+                    <?php if ($image_1['url']) : ?>
+                        <img class="shadow rounded" src="<?= $image_1['url'] ?>" alt="<?= $image_1['alt'] ?>" />
+                    <?php endif; ?>
                 </div>
                 <div class="col-xs-12 col-md-6 p-5">
-                    <h3>N-Abler II</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium alias placeat corporis, voluptates tempora quis explicabo est, eveniet veniam rem voluptatibus dolores quidem, dolor beatae sed quia fugiat quo. Autem?</p>
+                    <h2><?php the_field('title_1'); ?></h2>
+                    <p><?php the_field('description_1'); ?></p>
                 </div>
             </div>
         </div>
@@ -65,11 +68,13 @@ $image_3 = get_field('image_3');
         <div class="container mb-5">
             <div class="row na-image-text-container">
                 <div class="col-xs-12 col-md-6 mb-4 order-md-2">
-                    <img src="<?= $image_2['url'] ?>" alt="<?= $image_2['alt'] ?>" />
+                    <?php if ($image_2['url']) : ?>
+                    <img class="shadow rounded" src="<?= $image_2['url'] ?>" alt="<?= $image_2['alt'] ?>" />
+                    <?php endif; ?>
                 </div>
                 <div class="col-xs-12 col-md-6 p-5">
-                    <h3>N-Abler III</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium alias placeat corporis, voluptates tempora quis explicabo est, eveniet veniam rem voluptatibus dolores quidem, dolor beatae sed quia fugiat quo. Autem?</p>
+                    <h2><?php the_field('title_2'); ?></h2>
+                    <p><?php the_field('description_2'); ?></p>
                 </div>
             </div>
         </div>
@@ -78,11 +83,13 @@ $image_3 = get_field('image_3');
     <section class="container mb-5 na-image-container">
         <div class="row na-image-text-container">
             <div class="col-xs-12 col-md-6 mb-4">
-                <img src="<?= $image_3['url'] ?>" alt="<?= $image_3['alt'] ?>" />
+                <?php if ($image_3['url']) : ?>
+                    <img class="shadow rounded" src="<?= $image_3['url'] ?>" alt="<?= $image_3['alt'] ?>" />
+                <?php endif; ?>
             </div>
             <div class="col-xs-12 col-md-6 p-5">
-                <h3>N-Abler III</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium alias placeat corporis, voluptates tempora quis explicabo est, eveniet veniam rem voluptatibus dolores quidem, dolor beatae sed quia fugiat quo. Autem?</p>
+                <h2><?php the_field('title_3'); ?></h2>
+                <p><?php the_field('description_3'); ?></p>
             </div>
         </div>
     </section>

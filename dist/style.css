@@ -43,12 +43,25 @@ li {
   list-style-type: none;
 }
 
+/*
+ * Overrides
+ */
 .navbar {
   background: #4a4a4a;
   font-size: 14px;
 }
-.navbar a {
-  font-size: 14px;
+
+.dropdown-menu {
+  margin-top: -5px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-size: 16px;
+  color: #fff !important;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background: #ddd;
 }
 
 .na-custom-logo-container {
@@ -74,9 +87,9 @@ li {
   border-radius: 0.25rem;
   background: #fff;
   position: absolute;
-  width: 278px;
+  width: 190px;
   top: 0;
-  margin-top: 54px;
+  margin-top: 79px;
   z-index: 2;
 }
 .na-search-dropdown .fas {
@@ -100,7 +113,7 @@ li {
 }
 .na-search-dropdown-item:hover, .na-search-dropdown-item:focus {
   cursor: pointer;
-  background: #f8f9fa;
+  background: #ddd;
   color: black;
 }
 
@@ -132,6 +145,26 @@ li {
   font-size: 16px;
 }
 
+/* sticky footer */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.site {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  flex-shrink: 0;
+}
+
+/* sticky footer */
 html {
   overflow-x: hidden;
 }
@@ -150,7 +183,6 @@ html {
 }
 
 .na-image-container img {
-  border-radius: 5px;
   max-width: 95vw;
   width: 100%;
   margin: 0 auto;
@@ -160,6 +192,20 @@ html {
   .na-image-text-container {
     padding: 60px;
   }
+}
+
+.na-break-section {
+  margin: 100px auto;
+}
+@media (min-width: 992px) {
+  .na-break-section {
+    max-width: 1140px;
+  }
+}
+
+.na-break-line {
+  width: 150px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=style.css.map */
