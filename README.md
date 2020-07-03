@@ -12,13 +12,13 @@
 
 ## Webpack Bundles
 
-If you need to add JavaScript that will run on every page, write it in or import it into `/src/js/index`
+If you need to add a JavaScript file that will run on every page, import it into `/src/js/index` or write it there
 
 If it is page specific, add a property to the `entry` object in `webpack.config.js`. For example, `src/js/search/index.js` will build `dist/search.js`
 
 ## SCSS to CSS
 
-If you need to add CSS that will run on every page, you can use `/src/scss/layout/layout.scss` or create a new file with an underline prefix and import it to `/src/scss/style.scss`
+If you need to add a CSS file that will run on every page, you can use `/src/scss/layout/layout.scss` or create a new file with an underline prefix and import it to `/src/scss/style.scss`
 
 If it is page specific, add a new file that will match the new page you are working with. For example, `/src/scss/pages/test.scss` for a page with the page_name test
 
