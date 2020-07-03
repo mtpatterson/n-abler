@@ -145,11 +145,11 @@ function page_scripts() {
 	$current_url =  home_url($wp->request);
 	$pages = get_pages();
 
-	// add each page's JS and CSS files
+	// add each page's JS and CSS files if they exist
 	foreach ($pages as $page) {
-		$title = strtolower($page->post_title);
+		$slug = $page->post_name;
 
-		if ($title == 'home') {
+		if ($slug == 'home') {
 			if (file_exists("/wp-content/themes/n-abler/dist/home.js")) {
 				wp_enqueue_script("home_js", "/wp-content/themes/n-abler/dist/home.js", array(), THEME_VERSION, true);
 			}
@@ -159,14 +159,14 @@ function page_scripts() {
 			}
 		}
 
-		if (is_page($title)) {
+		if (is_page($slug)) {
 			// page by title
-			if (file_exists("/wp-content/themes/n-abler/dist/{$title}.js")) {
-				wp_enqueue_script("{$title}_js", "/wp-content/themes/n-abler/dist/{$title}.js", array(), THEME_VERSION, true);
+			if (file_exists("/wp-content/themes/n-abler/dist/{$slug}.js")) {
+				wp_enqueue_script("{$slug}_js", "/wp-content/themes/n-abler/dist/{$slug}.js", array(), THEME_VERSION, true);
 			}
 
-			if (file_exists("/wp-content/themes/n-abler/dist/pages/{$title}.css")) {
-				wp_enqueue_style("{$title}_css", "/wp-content/themes/n-abler/dist/pages/{$title}.css", array(), THEME_VERSION);
+			if (file_exists("/wp-content/themes/n-abler/dist/pages/{$slug}.css")) {
+				wp_enqueue_style("{$slug}_css", "/wp-content/themes/n-abler/dist/pages/{$slug}.css", array(), THEME_VERSION);
 			}
 		} else if (is_search()) {
 			// search page
