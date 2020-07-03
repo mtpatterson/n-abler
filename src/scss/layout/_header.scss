@@ -1,13 +1,28 @@
-// navbar
+/*
+ * Overrides
+ */
 .navbar {
   background: $dark;
   font-size: 14px;
+}
 
-  a {
-    font-size: 14px;
+.dropdown-menu {
+  margin-top: -5px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-size: 16px;
+  color: $white !important;
+}
+
+.dropdown-item {
+  &:hover,
+  &:focus {
+    background: $gray;
   }
 }
 
+// logo
 .na-custom-logo-container {
   height: 92px !important;
 }
@@ -32,9 +47,9 @@
   border-radius: 0.25rem;
   background: $white;
   position: absolute;
-  width: 278px;
+  width: 190px;
   top: 0;
-  margin-top: 54px;
+  margin-top: 79px;
   z-index: 2;
 
   .fas {
@@ -61,7 +76,7 @@
   &:hover,
   &:focus {
     cursor: pointer;
-    background: $light;
+    background: $gray;
     color: black;
   }
 }

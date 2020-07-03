@@ -1,3 +1,23 @@
+/* sticky footer */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.site {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  flex-shrink: 0;
+}
+/* sticky footer */
+
 html {
   overflow-x: hidden;
 }
@@ -15,7 +35,6 @@ html {
 
 .na-image-container {
   img {
-    border-radius: 5px;
     max-width: 95vw;
     width: 100%;
     margin: 0 auto;
@@ -26,4 +45,17 @@ html {
   @media #{$medium} {
     padding: 60px;
   }
+}
+
+.na-break-section {
+  margin: 100px auto;
+
+  @media #{$medium} {
+    max-width: 1140px;
+  }
+}
+
+.na-break-line {
+  width: 150px;
+  margin: 0 auto;
 }

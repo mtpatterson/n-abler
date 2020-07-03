@@ -1,6 +1,6 @@
 import React from 'react';
 import { array } from 'prop-types';
-import { resizeUrl } from '../utils';
+import { normalizeUrl } from '../utils';
 
 export default function SearchPagePosts({ posts }) {
   return posts.map(({ id, title, _embedded = false }) => {
@@ -12,7 +12,7 @@ export default function SearchPagePosts({ posts }) {
           {/* show image only if image exists */}
           {_embedded['wp:featuredmedia'] && (
             <img
-              src={resizeUrl(_embedded['wp:featuredmedia'], 'medium')}
+              src={normalizeUrl(_embedded['wp:featuredmedia'])}
               alt={title && title.rendered}
             />
           )}

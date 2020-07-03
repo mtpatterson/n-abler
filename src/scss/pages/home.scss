@@ -13,15 +13,14 @@
   }
 }
 
-.na-break-section {
-  margin: 100px auto;
+.jumbotron {
+  padding: 2rem 0;
 
   @media #{$medium} {
-    max-width: 1140px;
+    padding: 50px;
   }
 }
 
-.na-break-line {
-  width: 150px;
-  margin: 0 auto;
+.jumbotron-inner {
+  padding: 50px;
 }
