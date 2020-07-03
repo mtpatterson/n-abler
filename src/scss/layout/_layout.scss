@@ -18,9 +18,11 @@ body {
 }
 /* sticky footer */
 
-html {
+html,
+body {
   overflow-x: hidden;
 }
+
 .jumbotron {
   background: $white;
 
