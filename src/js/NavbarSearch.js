@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { string } from 'prop-types';
-import SearchDropdownPosts from './SearchDropdownPosts';
+import NavbarSearchDropdown from './NavbarSearchDropdown';
 import { debounceFetchPosts } from './services';
 
-export default function SearchForm({ postReq }) {
+export default function NavbarSearch({ postReq }) {
   // hooks to manage state
   // when you call setQuery, the input value will update
   // and reflect changes in the returned JSX below
@@ -105,7 +105,7 @@ export default function SearchForm({ postReq }) {
         </div>
       </form>
       {posts && (
-        <SearchDropdownPosts
+        <NavbarSearchDropdown
           posts={posts}
           onKeyDown={handlePostsKeyDown}
           firstResultRef={firstResultRef}
@@ -115,6 +115,6 @@ export default function SearchForm({ postReq }) {
   );
 }
 
-SearchForm.propTypes = {
+NavbarSearch.propTypes = {
   postReq: string.isRequired
 };

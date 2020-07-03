@@ -95,7 +95,7 @@ _NA.home =
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("////# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvaG9tZS9pbmRleC5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovL19OQS5bbmFtZV0vLi9zcmMvanMvaG9tZS9pbmRleC5qcz8yOThkIl0sInNvdXJjZXNDb250ZW50IjpbIi8vXG4iXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/home/index.js\n");
+eval("throw new Error(\"Module build failed (from ./node_modules/eslint-loader/dist/cjs.js):\\nError: ENOENT: no such file or directory, open '/Users/brandonpatterson/code/php/wordpress/n-abler/wp-content/themes/n-abler/src/js/home/index.js'\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvaG9tZS9pbmRleC5qcy5qcyIsInNvdXJjZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/js/home/index.js\n");
 
 /***/ })
 

@@ -1,8 +1,8 @@
 import './navbar';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SearchForm from './SearchForm';
+import NavbarSearch from './NavbarSearch';
 
 const form = document.querySelector('.js-search-form-navbar');
 
-ReactDOM.render(<SearchForm postReq={form.dataset.value} />, form);
+ReactDOM.render(<NavbarSearch postReq={form.dataset.value} />, form);

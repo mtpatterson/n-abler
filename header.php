@@ -28,25 +28,22 @@
 	<header id="masthead" class="site-header">
 		<nav class="navbar navbar-expand-lg navbar-dark">
 			<div class="na-navbar-brand navbar-brand">
-				<div style="position: absolute;">
-					<button
-						class="navbar-toggler"
-						type="button"
-						data-toggle="collapse"
-						data-target="#navbarItems"
-						aria-controls="navbarItems"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
 				<div class="na-custom-logo-container">
 					<?php the_custom_logo(); ?>
 				</div>
 			</div>
 
-			<?php get_template_part( 'templates/partials/search', 'form' ); ?>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarItems"
+				aria-controls="navbarItems"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
 			<div class="collapse navbar-collapse">
 				<?php /* Primary navigation */
@@ -62,6 +59,8 @@
 					) );
 				?>
 			</div>
+
+			<?php get_template_part( 'templates/partials/search', 'form' ); ?>
 
 		</nav>
 
