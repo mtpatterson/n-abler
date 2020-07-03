@@ -14,7 +14,7 @@
 
 If you need to add a JavaScript file that will run on every page, import it into `/src/js/index` or write it there
 
-If it is page specific, add a property to the `entry` object in `webpack.config.js`. For example, `src/js/search/index.js` will build `dist/search.js`
+If it is page specific, add a property to the `entry` object in `webpack.config.js`. For example, `search: './src/js/search/index.js'` will build `dist/search.js`
 
 ## SCSS to CSS
 
