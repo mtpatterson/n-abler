@@ -64,18 +64,34 @@ li {
   background: #ddd;
 }
 
+.navbar-toggler {
+  margin-top: -52px;
+}
+
 .na-custom-logo-container {
   height: 92px !important;
 }
 
-.na-search-form {
+.na-search-form-navbar {
   position: relative;
+  width: 100%;
+}
+@media (min-width: 992px) {
+  .na-search-form-navbar {
+    width: inherit;
+  }
 }
 
-.na-search-group {
+.na-search-form {
+  position: relative;
+  width: 100%;
+}
+
+.input-group.na-search-group {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .na-search-input {
@@ -89,8 +105,13 @@ li {
   position: absolute;
   width: 190px;
   top: 0;
-  margin-top: 79px;
   z-index: 2;
+  margin-top: 55px;
+}
+@media (min-width: 992px) {
+  .na-search-dropdown {
+    margin-top: 39px;
+  }
 }
 .na-search-dropdown .fas {
   color: #ddd;
