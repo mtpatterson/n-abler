@@ -52,7 +52,7 @@ export default function useEndlessScroll(
       ) {
         if (
           filteredBy.categories.length === 0 &&
-          filteredBy.categories.length === 0
+          filteredBy.tags.length === 0
         ) {
           handleGetNewPage(pages, currentPage, setCurrentPage, 'no filter');
         } else {
@@ -77,6 +77,7 @@ export default function useEndlessScroll(
       }
     }
 
+    window.addEventListener('scroll', e => console.log(1));
     window.addEventListener('scroll', listenForBottom);
 
     return () => window.removeEventListener('scroll', listenForBottom);
