@@ -36,6 +36,7 @@ get_header();
 
 			<!-- container for React app -->
 			<div class="na-search-page js-search-page">
+				<!-- show the short loading state -->
 				<div class="py-4 px-5 mt-5 rounded shadow container bg-white">
 					<div class="na-search-results col d-flex justify-content-center align-items-center">
 						<i class="fa fa-spinner fa-2x fa-spin"></i>
