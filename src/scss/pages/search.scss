@@ -25,3 +25,14 @@
 .na-btn-term.active {
   background: $gray;
 }
+
+.na-search-page,
+.na-search-results {
+  min-height: 700px;
+}
+
+.na-search-page-container {
+  @media #{$medium} {
+    margin-top: 48px;
+  }
+}

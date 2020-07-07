@@ -68,7 +68,7 @@ export default function SearchPage({
   }
 
   return (
-    <div className="py-4 px-5 rounded shadow container bg-white">
+    <div className="na-search-page-container py-4 px-5 rounded shadow container bg-white">
       <h1>Search Results</h1>
       <div className="row">
         <div className="col-xs-12 col-md-4">
@@ -125,7 +125,7 @@ export default function SearchPage({
             </div>
           </form>
         </div>
-        <div className="col-md-8">
+        <div className="na-search-results col-md-8">
           {posts && posts.length > 0 ? (
             <Fragment>
               <div className="na-cards" data-testid="search-page-posts">

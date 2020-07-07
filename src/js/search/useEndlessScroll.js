@@ -46,38 +46,45 @@ export default function useEndlessScroll(
     }
 
     function listenForBottom() {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 50
-      ) {
-        if (
-          filteredBy.categories.length === 0 &&
-          filteredBy.tags.length === 0
-        ) {
-          handleGetNewPage(pages, currentPage, setCurrentPage, 'no filter');
-        } else {
-          if (filteredBy.categories.length > 0) {
-            handleGetNewPage(
-              pagesCats,
-              currentPageCats,
-              setCurrentPageCats,
-              'cats'
-            );
-          }
+      const { innerHeight, scrollY } = window;
+      const { offsetHeight } = document.body;
 
-          if (filteredBy.tags.length > 0) {
-            handleGetNewPage(
-              pagesTags,
-              currentPageTags,
-              setCurrentPageTags,
-              'tags'
-            );
-          }
+      const isScrolling =
+        innerHeight + scrollY >= offsetHeight - offsetHeight / 2;
+
+      const notFiltering =
+        filteredBy.categories.length === 0 && filteredBy.tags.length === 0;
+
+      if (isScrolling) {
+        if (notFiltering) {
+          return handleGetNewPage(
+            pages,
+            currentPage,
+            setCurrentPage,
+            'no filter'
+          );
+        }
+
+        if (filteredBy.categories.length > 0) {
+          handleGetNewPage(
+            pagesCats,
+            currentPageCats,
+            setCurrentPageCats,
+            'cats'
+          );
+        }
+
+        if (filteredBy.tags.length > 0) {
+          handleGetNewPage(
+            pagesTags,
+            currentPageTags,
+            setCurrentPageTags,
+            'tags'
+          );
         }
       }
     }
 
-    window.addEventListener('scroll', e => console.log(1));
     window.addEventListener('scroll', listenForBottom);
 
     return () => window.removeEventListener('scroll', listenForBottom);

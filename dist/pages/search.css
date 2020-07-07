@@ -24,4 +24,15 @@
   background: #ddd;
 }
 
+.na-search-page,
+.na-search-results {
+  min-height: 700px;
+}
+
+@media (min-width: 992px) {
+  .na-search-page-container {
+    margin-top: 48px;
+  }
+}
+
 /*# sourceMappingURL=search.css.map */
