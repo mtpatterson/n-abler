@@ -14,7 +14,7 @@
 	<div class="container mb-5">
 		<div class="row na-image-text-container">
 			<div class="col-xs-12  col-md-6 mb-4">
-				<img src="<?php echo get_the_post_thumbnail_url(null, array('768', '576')) ?>" alt="<?php the_title(); ?>">
+				<img src="<?php echo get_the_post_thumbnail_url(null, array('768', '576')); ?>" alt="<?php the_title(); ?>">
 			</div>
 			<div class="col-xs-12 col-md-6 p-5">
 				<?php the_title('<h1 class="entry-title">', '</h1>'); ?>
