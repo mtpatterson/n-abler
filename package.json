@@ -10,7 +10,7 @@
     "build:css": "sass --style=expanded src/scss:dist",
     "watch:css": "npm run build:css && onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -d --watch",
-    "start": "rimraf dist && npm run build && npm-run-all --parallel browser-sync watch:css webpack",
+    "start": "npm-run-all --parallel browser-sync watch:css webpack",
     "build": "npm run build:css && webpack -d",
     "format": "prettier --ignore-path .eslintignore \"**/*.+(js|json)\" --write",
     "lint": "eslint . --quiet",
