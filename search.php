@@ -15,6 +15,7 @@ while ( have_posts() ) : the_post();
 	// add data from WordPress to an array
 	array_push($initial_posts, array(
 		'id' => get_the_ID(),
+		'url'=> get_permalink(),
 		'title' => array(
 			'rendered' => get_the_title(),
 		),
