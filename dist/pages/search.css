@@ -7,7 +7,7 @@
 .na-card {
   flex-grow: 1;
   flex-basis: 49%;
-  height: 300px;
+  height: 270px;
   margin: 2px;
   max-width: 224px;
 }
@@ -33,6 +33,14 @@
   .na-search-page-container {
     margin-top: 48px;
   }
+}
+
+.na-card-img-top {
+  min-height: 197px;
+}
+
+.na-card-body {
+  padding: 15px 15px 3px 15px;
 }
 
 /*# sourceMappingURL=search.css.map */
