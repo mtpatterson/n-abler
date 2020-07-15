@@ -9,13 +9,13 @@ export default function SearchPagePosts({ posts }) {
         {/* show image only if image exists */}
         {_embedded['wp:featuredmedia'] && (
           <img
-            className="card-img-top na-card-img-top"
+            className="na-card-img-top"
             src={normalizeUrl(_embedded['wp:featuredmedia'])}
             alt={title && title.rendered}
           />
         )}
-        <div className="na-card-body">
-          <p className="card-title">{title && title.rendered}</p>
+        <div className="card-body na-card-body">
+          <div>{title && title.rendered}</div>
         </div>
       </a>
     );
