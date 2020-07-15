@@ -5,8 +5,8 @@ import { normalizeUrl } from '../utils';
 export default function SearchPagePosts({ posts }) {
   return posts.map(({ id, url, title, _embedded = false }) => {
     return (
-      <a href={url} key={id}>
-        <div className="na-card card">
+      <a className="na-card card" href={url} key={id}>
+        <div>
           {/* each item needs a unique key prop */}
           <p className="card-title">{title && title.rendered}</p>
           <div className="card-body">
