@@ -28,9 +28,7 @@
 	<header id="masthead" class="site-header">
 		<nav class="navbar navbar-expand-lg navbar-dark">
 			<div class="na-navbar-brand navbar-brand">
-				<div class="na-custom-logo-container">
-					<?php the_custom_logo(); ?>
-				</div>
+				<?php the_custom_logo(); ?>
 			</div>
 
 			<button
