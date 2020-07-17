@@ -90,8 +90,8 @@ export async function fetchFilteredPosts(
     return {
       newPosts,
       newPages,
-      newPagesCats: newPages,
-      newPagesTags: newPages,
+      newPagesCats: Number(newPages),
+      newPagesTags: Number(newPages),
       currentPage: 1
     };
   } else {

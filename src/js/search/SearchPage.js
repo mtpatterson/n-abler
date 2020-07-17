@@ -89,40 +89,44 @@ export default function SearchPage({
               value={query}
               onChange={handleSearchInputChange}
             />
-            <div>
-              <h2>Categories:</h2>
-              {categories.map((cat, index) => {
-                return (
-                  <TermItem
-                    key={cat.term_id}
-                    index={index}
-                    name={cat.cat_name}
-                    count={cat.category_count}
-                    handleFilterByTerm={() => {
-                      setCurrentPage(1);
-                      handleFilterByTerm(cat.term_id, 'categories');
-                    }}
-                  />
-                );
-              })}
-            </div>
-            <div>
-              <h2>Tags:</h2>
-              {tags.map((tag, index) => {
-                return (
-                  <TermItem
-                    key={tag.term_id}
-                    index={index}
-                    name={tag.name}
-                    count={tag.count}
-                    handleFilterByTerm={() => {
-                      setCurrentPage(1);
-                      handleFilterByTerm(tag.term_id, 'tags');
-                    }}
-                  />
-                );
-              })}
-            </div>
+            {categories.length > 0 && (
+              <Fragment>
+                <h2>Categories:</h2>
+                {categories.map((cat, index) => {
+                  return (
+                    <TermItem
+                      key={cat.term_id}
+                      index={index}
+                      name={cat.cat_name}
+                      count={cat.category_count}
+                      handleFilterByTerm={() => {
+                        setCurrentPage(1);
+                        handleFilterByTerm(cat.term_id, 'categories');
+                      }}
+                    />
+                  );
+                })}
+              </Fragment>
+            )}
+            {tags.length > 0 && (
+              <Fragment>
+                <h2>Tags:</h2>
+                {tags.map((tag, index) => {
+                  return (
+                    <TermItem
+                      key={tag.term_id}
+                      index={index}
+                      name={tag.name}
+                      count={tag.count}
+                      handleFilterByTerm={() => {
+                        setCurrentPage(1);
+                        handleFilterByTerm(tag.term_id, 'tags');
+                      }}
+                    />
+                  );
+                })}
+              </Fragment>
+            )}
           </form>
         </div>
         <div className="na-search-results col-md-8">
