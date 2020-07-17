@@ -10,7 +10,7 @@
 
 ?>
 
-<article class="na-image-container pb-5" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article class="na-image-container" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="container mb-5">
 		<div class="row na-image-text-container">
 			<div class="col-xs-12  col-md-6 mb-4">

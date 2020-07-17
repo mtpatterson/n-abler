@@ -8,7 +8,7 @@ module.exports = {
     search: './src/js/search/index.js'
   },
   output: {
-    filename: '[name].js',
+    filename: '[name].bundle.js',
     sourceMapFilename: '[name].map',
     library: '_NA.[name]',
     libraryTarget: 'assign'

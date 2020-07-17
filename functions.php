@@ -137,7 +137,7 @@ function _s_scripts() {
 	wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
 	wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
 	wp_enqueue_style('main_css', '/wp-content/themes/n-abler/dist/style.css', array(), THEME_VERSION);
-	wp_enqueue_script('main_js', '/wp-content/themes/n-abler/dist/main.js', array(), THEME_VERSION, true);
+	wp_enqueue_script('main_js', '/wp-content/themes/n-abler/dist/main.bundle.js', array(), THEME_VERSION, true);
 }
 
 function page_scripts() {
@@ -150,8 +150,8 @@ function page_scripts() {
 		$slug = $page->post_name;
 
 		if ($slug == 'home') {
-			if (file_exists("/wp-content/themes/n-abler/dist/home.js")) {
-				wp_enqueue_script("home_js", "/wp-content/themes/n-abler/dist/home.js", array(), THEME_VERSION, true);
+			if (file_exists("/wp-content/themes/n-abler/dist/home.bundle.js")) {
+				wp_enqueue_script("home_js", "/wp-content/themes/n-abler/dist/home.bundle.js", array(), THEME_VERSION, true);
 			}
 
 			if (file_exists("/wp-content/themes/n-abler/dist/pages/home.css")) {
@@ -161,8 +161,8 @@ function page_scripts() {
 
 		if (is_page($slug)) {
 			// page by title
-			if (file_exists("/wp-content/themes/n-abler/dist/{$slug}.js")) {
-				wp_enqueue_script("{$slug}_js", "/wp-content/themes/n-abler/dist/{$slug}.js", array(), THEME_VERSION, true);
+			if (file_exists("/wp-content/themes/n-abler/dist/{$slug}.bundle.js")) {
+				wp_enqueue_script("{$slug}_js", "/wp-content/themes/n-abler/dist/{$slug}.bundle.js", array(), THEME_VERSION, true);
 			}
 
 			if (file_exists("/wp-content/themes/n-abler/dist/pages/{$slug}.css")) {
@@ -170,7 +170,7 @@ function page_scripts() {
 			}
 		} else if (is_search()) {
 			// search page
-			wp_enqueue_script("search_js", "/wp-content/themes/n-abler/dist/search.js", array(), THEME_VERSION, true);
+			wp_enqueue_script("search_js", "/wp-content/themes/n-abler/dist/search.bundle.js", array(), THEME_VERSION, true);
 			wp_enqueue_style("search_css", "/wp-content/themes/n-abler/dist/pages/search.css", array(), THEME_VERSION);
 		}
 	}
