@@ -24,10 +24,7 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
-    "strict": [
-      "error",
-      "never"
-    ]
+    "strict": ["error", "never"]
   },
   "overrides": [
     {
@@ -36,9 +33,7 @@
       "parserOptions": {
         "project": "./tsconfig.json"
       },
-      "plugins": [
-        "@typescript-eslint/eslint-plugin"
-      ],
+      "plugins": ["@typescript-eslint/eslint-plugin"],
       "extends": [
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
