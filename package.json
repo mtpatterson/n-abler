@@ -67,10 +67,10 @@
     }
   },
   "lint-staged": {
-    "*.+(ts|js)x?": [
+    "*.+(js|ts|tsx)": [
       "npm run lint"
     ],
-    "**/*.+(ts|js)?x": [
+    "**/*.+(js|ts|tsx)": [
       "npm run format"
     ]
   },
