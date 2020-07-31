@@ -20,6 +20,9 @@
   width: 100%;
 }
 
+.na-btn-term {
+  margin-left: -10px;
+}
 .na-btn-term.active {
   background: #ddd;
 }

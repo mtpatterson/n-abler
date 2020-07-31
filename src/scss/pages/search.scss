@@ -22,8 +22,12 @@
   }
 }
 
-.na-btn-term.active {
-  background: $gray;
+.na-btn-term {
+  margin-left: -10px;
+
+  &.active {
+    background: $gray;
+  }
 }
 
 .na-search-page,

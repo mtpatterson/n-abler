@@ -91,6 +91,7 @@ export default function SearchPage({
             />
             {categories.length > 0 && (
               <Fragment>
+                <br />
                 <h2>Categories:</h2>
                 {categories.map((cat, index) => {
                   return (
