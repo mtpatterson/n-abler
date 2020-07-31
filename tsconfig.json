@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "./src",
+    "module": "es6",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "target": "es6",
+    "strictFunctionTypes": false
+  },
+  "exclude": ["node_modules"]
+}

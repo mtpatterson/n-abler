@@ -1,67 +1,70 @@
-import React, { useEffect, useRef, useState, Fragment } from 'react';
-import { string } from 'prop-types';
-import NavbarSearchDropdown from './NavbarSearchDropdown';
+import * as React from 'react';
+import { FC } from 'react';
+import { ChangeEvent, KeyboardEvent, Fragment, useRef, useState } from 'react';
 import { debounceFetchPosts } from './services';
+import NavbarSearchDropdown from './NavbarSearchDropdown';
 
-export default function NavbarSearch({ postReq }) {
-  // hooks to manage state
-  // when you call setQuery, the input value will update
-  // and reflect changes in the returned JSX below
-  const [query, setQuery] = useState(postReq ? postReq : '');
+interface NavbarSearchProps {
+  postReq: string;
+}
+
+const NavbarSearch: FC<NavbarSearchProps> = ({
+  postReq
+}: NavbarSearchProps) => {
+  const [query, setQuery] = useState<string>(postReq ? postReq : '');
   const [posts, setPosts] = useState(null);
-  const [submit, setSubmit] = useState(false);
 
   // DOM element references used in returned JSX below
-  const formRef = useRef();
-  const inputRef = useRef();
-  const firstResultRef = useRef();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const firstAnchorRef = useRef<HTMLAnchorElement | null>(null);
 
-  // used to submit form with latest input value
-  useEffect(() => {
-    if (submit) {
-      formRef.current.submit();
-    }
-  }, [submit]);
+  async function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement;
 
-  async function handleInputChange(e) {
     // set form input value
-    setQuery(e.target.value);
+    setQuery(target.value);
 
-    if (e.target.value.length === 0) {
+    if (target.value.length === 0) {
       setPosts(null);
     }
 
-    if (e.target.value.length <= 2) {
+    if (target.value.length <= 2) {
       // search after 2 characters
       return;
     }
 
     // handle request and set value
-    const { newPosts } = await debounceFetchPosts(e.target.value);
+    const { newPosts } = await debounceFetchPosts(target.value);
 
     setPosts(newPosts);
   }
 
-  function onInputKeydown(e) {
-    if (e.key === 'ArrowDown' && firstResultRef.current) {
+  function onInputKeydown(e: KeyboardEvent) {
+    if (e.key === 'ArrowDown' && firstAnchorRef.current) {
       e.preventDefault();
 
-      firstResultRef.current.focus();
+      firstAnchorRef.current.focus();
     }
   }
 
-  function handlePostsKeyDown(e) {
-    if (e.key === 'ArrowDown' && firstResultRef.current) {
+  function handlePostsKeyDown(e: KeyboardEvent) {
+    const target = e.target as HTMLInputElement;
+
+    if (e.key === 'ArrowDown' && firstAnchorRef.current) {
       e.preventDefault();
 
-      if (e.target.nextElementSibling) {
-        e.target.nextElementSibling.focus();
+      const nextElement = target.nextElementSibling as HTMLElement;
+
+      if (nextElement) {
+        nextElement.focus();
       }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
 
-      if (e.target.previousElementSibling) {
-        e.target.previousElementSibling.focus();
+      const previousElement = target.nextElementSibling as HTMLElement;
+
+      if (previousElement) {
+        previousElement.focus();
       } else {
         inputRef.current.focus();
       }
@@ -73,7 +76,6 @@ export default function NavbarSearch({ postReq }) {
   return (
     <Fragment>
       <form
-        ref={formRef}
         role="search"
         method="get"
         action="/"
@@ -107,14 +109,12 @@ export default function NavbarSearch({ postReq }) {
       {posts && (
         <NavbarSearchDropdown
           posts={posts}
-          onKeyDown={handlePostsKeyDown}
-          firstResultRef={firstResultRef}
+          handlePostsKeyDown={handlePostsKeyDown}
+          firstAnchorRef={firstAnchorRef}
         />
       )}
     </Fragment>
   );
-}
-
-NavbarSearch.propTypes = {
-  postReq: string.isRequired
 };
+
+export default NavbarSearch;
