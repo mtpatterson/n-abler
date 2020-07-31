@@ -6,3 +6,5 @@ import NavbarSearch from './NavbarSearch';
 const form: HTMLElement = document.querySelector('.js-search-form-navbar');
 
 ReactDOM.render(<NavbarSearch postReq={form.dataset.value} />, form);
+
+console.log(1);
