@@ -12,6 +12,9 @@
 
 <article class="na-image-container" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="container mb-5">
+		<div>
+			<p>If you have any questions or would like to place an order, please <a href="/contact/">contact us.</a></p>
+		</div>
 		<div class="row na-image-text-container">
 			<div class="col-xs-12  col-md-6 mb-4">
 				<img src="<?php echo get_the_post_thumbnail_url(null, array('768', '576')); ?>" alt="<?php the_title(); ?>">

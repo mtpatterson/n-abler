@@ -8,6 +8,9 @@ body {
   flex-direction: column;
 }
 
+h2 {
+  font-size: 18px;
+}
 .site {
   flex: 1 0 auto;
 }
@@ -26,7 +29,9 @@ body {
   background: $white;
 
   @media #{$medium} {
-    padding: 100px;
+    padding: 20px;
+    padding-top: 50px;
+    padding-bottom: 0px;
   }
 }
 
