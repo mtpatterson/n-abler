@@ -4,8 +4,8 @@ const path = require('path');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    main: './src/js/index.js',
-    search: './src/js/search/index.js'
+    main: './src/js/index.tsx',
+    search: './src/js/search/index.tsx'
   },
   output: {
     filename: '[name].bundle.js',
@@ -17,7 +17,7 @@ module.exports = {
     rules: [
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: {
           loader: 'eslint-loader',
@@ -27,20 +27,22 @@ module.exports = {
         }
       },
       {
-        test: /\.(js|jsx)$/,
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
+      },
+      {
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader'
-          }
-        ]
+        loader: 'ts-loader'
       }
     ]
   },
   resolve: {
     alias: {
       '@frontend': path.resolve(__dirname, './src/js')
-    }
+    },
+    extensions: ['.ts', '.tsx', '.js']
   },
   plugins: [
     new webpack.BannerPlugin({
