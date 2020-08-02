@@ -1,40 +1,34 @@
 import * as React from 'react';
-import { FC } from 'react';
 import { ChangeEvent, KeyboardEvent, Fragment, useRef, useState } from 'react';
+import { Post } from './types';
 import { debounceFetchPosts } from './services';
 import NavbarSearchDropdown from './NavbarSearchDropdown';
 
-interface NavbarSearchProps {
-  postReq: string;
-}
-
-const NavbarSearch: FC<NavbarSearchProps> = ({
-  postReq
-}: NavbarSearchProps) => {
+function NavbarSearch({ postReq }: { postReq: string }): JSX.Element {
   const [query, setQuery] = useState<string>(postReq ? postReq : '');
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState<Post[] | []>(null);
 
   // DOM element references used in returned JSX below
   const inputRef = useRef<HTMLInputElement | null>(null);
   const firstAnchorRef = useRef<HTMLAnchorElement | null>(null);
 
   async function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    const target = e.target as HTMLInputElement;
+    const currentTarget = e.currentTarget as HTMLInputElement;
 
     // set form input value
-    setQuery(target.value);
+    setQuery(currentTarget.value);
 
-    if (target.value.length === 0) {
+    if (currentTarget.value.length === 0) {
       setPosts(null);
     }
 
-    if (target.value.length <= 2) {
+    if (currentTarget.value.length <= 2) {
       // search after 2 characters
       return;
     }
 
     // handle request and set value
-    const { newPosts } = await debounceFetchPosts(target.value);
+    const { newPosts } = await debounceFetchPosts(currentTarget.value);
 
     setPosts(newPosts);
   }
@@ -48,12 +42,12 @@ const NavbarSearch: FC<NavbarSearchProps> = ({
   }
 
   function handlePostsKeyDown(e: KeyboardEvent) {
-    const target = e.target as HTMLInputElement;
+    const currentTarget = e.currentTarget as HTMLInputElement;
 
     if (e.key === 'ArrowDown' && firstAnchorRef.current) {
       e.preventDefault();
 
-      const nextElement = target.nextElementSibling as HTMLElement;
+      const nextElement = currentTarget.nextElementSibling as HTMLElement;
 
       if (nextElement) {
         nextElement.focus();
@@ -61,7 +55,7 @@ const NavbarSearch: FC<NavbarSearchProps> = ({
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
 
-      const previousElement = target.nextElementSibling as HTMLElement;
+      const previousElement = currentTarget.nextElementSibling as HTMLElement;
 
       if (previousElement) {
         previousElement.focus();
@@ -115,6 +109,6 @@ const NavbarSearch: FC<NavbarSearchProps> = ({
       )}
     </Fragment>
   );
-};
+}
 
 export default NavbarSearch;

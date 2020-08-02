@@ -1,22 +1,35 @@
-import React, { useState, Fragment } from 'react';
-import { array, number } from 'prop-types';
+import * as React from 'react';
+import { FormEvent, Fragment, useState } from 'react';
+import { FilteredBy, Category, Post, Tag } from '../types';
 import SearchPagePosts from './SearchPagePosts';
 import { fetchFilteredPosts } from '../services';
 import useEndlessScroll from './useEndlessScroll';
 import TermItem from './TermItem';
 
-export default function SearchPage({
+interface SearchPageProps {
+  initialPosts: Post[];
+  categories: Category[];
+  tags: Tag[];
+  maxNumPages: number;
+}
+
+function SearchPage({
   initialPosts,
   categories,
   tags,
   maxNumPages
-}) {
-  const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState(window.location.search.split('=')[1]);
-  const [pages, setPages] = useState(maxNumPages);
-  const [pagesCats, setPagesCats] = useState(1);
-  const [pagesTags, setPagesTags] = useState(1);
-  const [filteredBy, setFilteredBy] = useState({ categories: [], tags: [] });
+}: SearchPageProps): JSX.Element {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>(
+    window.location.search.split('=')[1]
+  );
+  const [pages, setPages] = useState<number>(maxNumPages);
+  const [pagesCats, setPagesCats] = useState<number>(1);
+  const [pagesTags, setPagesTags] = useState<number>(1);
+  const [filteredBy, setFilteredBy] = useState<FilteredBy>({
+    categories: [],
+    tags: []
+  });
   const [posts, setPosts, setCurrentPage] = useEndlessScroll(
     initialPosts,
     query,
@@ -28,40 +41,45 @@ export default function SearchPage({
     setLoading
   );
 
-  async function handleSearchFilter(target) {
+  async function handleSearchFilter(newQuery: string): Promise<void> {
     const {
       newPosts,
       newPages,
       newPagesCats,
       newPagesTags,
-      currentPage = false
-    } = await fetchFilteredPosts(target, filteredBy);
+      currentPage
+    } = await fetchFilteredPosts(newQuery, filteredBy);
+
     setPosts(newPosts);
     setPages(newPages);
     setPagesCats(newPagesCats);
     setPagesTags(newPagesTags);
 
-    if (currentPage) {
+    if (currentPage !== 0) {
       setCurrentPage(currentPage);
     }
   }
 
-  function handleSearchInputChange(e) {
-    // set form input value
-    setQuery(e.target.value);
+  function handleSearchInputChange(e: FormEvent<HTMLInputElement>): void {
+    const newQuery = e.currentTarget.value;
 
-    handleSearchFilter(e.target.value);
+    setQuery(newQuery);
+
+    handleSearchFilter(newQuery);
   }
 
-  async function handleFilterByTerm(term_id, type) {
-    const found = filteredBy[type].find(i => i === term_id);
+  function handleFilterByTerm(term_id: number, filterType: string): void {
+    const found = filteredBy[filterType].find((i: number) => i === term_id);
 
     if (!found) {
-      filteredBy[type].push(term_id);
+      filteredBy[filterType].push(term_id);
     } else {
-      filteredBy[type] = filteredBy[type].filter(i => i !== term_id);
+      filteredBy[filterType] = filteredBy[filterType].filter(
+        (i: number) => i !== term_id
+      );
     }
 
+    setCurrentPage(1);
     setFilteredBy(filteredBy);
 
     handleSearchFilter(query);
@@ -93,16 +111,17 @@ export default function SearchPage({
               <Fragment>
                 <br />
                 <h2>Categories:</h2>
-                {categories.map((cat, index) => {
+                {categories.map((category: Category, index: number) => {
+                  const { cat_name, category_count, term_id } = category;
+
                   return (
                     <TermItem
-                      key={cat.term_id}
+                      key={term_id}
                       index={index}
-                      name={cat.cat_name}
-                      count={cat.category_count}
+                      name={cat_name}
+                      count={category_count}
                       handleFilterByTerm={() => {
-                        setCurrentPage(1);
-                        handleFilterByTerm(cat.term_id, 'categories');
+                        handleFilterByTerm(term_id, 'categories');
                       }}
                     />
                   );
@@ -112,16 +131,17 @@ export default function SearchPage({
             {tags.length > 0 && (
               <Fragment>
                 <h2>Tags:</h2>
-                {tags.map((tag, index) => {
+                {tags.map((tag: Tag, index: number) => {
+                  const { count, name, term_id } = tag;
+
                   return (
                     <TermItem
-                      key={tag.term_id}
+                      key={term_id}
                       index={index}
-                      name={tag.name}
-                      count={tag.count}
+                      name={name}
+                      count={count}
                       handleFilterByTerm={() => {
-                        setCurrentPage(1);
-                        handleFilterByTerm(tag.term_id, 'tags');
+                        handleFilterByTerm(term_id, 'tags');
                       }}
                     />
                   );
@@ -149,9 +169,4 @@ export default function SearchPage({
   );
 }
 
-SearchPage.propTypes = {
-  initialPosts: array.isRequired,
-  categories: array.isRequired,
-  tags: array.isRequired,
-  maxNumPages: number.isRequired
-};
+export default SearchPage;

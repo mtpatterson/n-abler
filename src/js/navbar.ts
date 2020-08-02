@@ -1,11 +1,11 @@
 // navbar
-const navbarToggler = <HTMLButtonElement>(
-  document.querySelector('.navbar-toggler')
-);
-const navbarCollapse = <HTMLButtonElement>(
-  document.querySelector('.navbar-collapse')
-);
-const dropdowns = <NodeList>document.querySelectorAll('.nav-item.dropdown');
+const navbarToggler = document.querySelector(
+  '.navbar-toggler'
+) as HTMLButtonElement;
+const navbarCollapse = document.querySelector(
+  '.navbar-collapse'
+) as HTMLButtonElement;
+const dropdowns = document.querySelectorAll('.nav-item.dropdown') as NodeList;
 
 // toggle navbar
 navbarToggler.addEventListener('click', () => {
@@ -13,7 +13,7 @@ navbarToggler.addEventListener('click', () => {
 });
 
 function showDropdown(dropdown: HTMLElement) {
-  const menu = dropdown.querySelector('.dropdown-menu');
+  const menu = dropdown.querySelector('.dropdown-menu') as HTMLElement;
 
   if (!menu.classList.contains('show')) {
     menu.classList.add('show');
@@ -25,7 +25,7 @@ function showDropdown(dropdown: HTMLElement) {
 }
 
 function hideDropdown(dropdown: HTMLElement) {
-  const menu = dropdown.querySelector('.dropdown-menu');
+  const menu = dropdown.querySelector('.dropdown-menu') as HTMLElement;
 
   if (menu.classList.contains('show')) {
     menu.classList.remove('show');
@@ -38,21 +38,21 @@ function hideDropdown(dropdown: HTMLElement) {
 
 // toggle dropdowns
 dropdowns.forEach(dropdown => {
-  dropdown.addEventListener('mouseenter', (event: MouseEvent) => {
-    const currentTarget = event.currentTarget as HTMLElement;
+  dropdown.addEventListener('mouseenter', (e: MouseEvent) => {
+    const currentTarget = e.currentTarget as HTMLElement;
 
     showDropdown(currentTarget);
   });
-  dropdown.addEventListener('mouseleave', (event: MouseEvent) => {
-    const currentTarget = event.currentTarget as HTMLElement;
+  dropdown.addEventListener('mouseleave', (e: MouseEvent) => {
+    const currentTarget = e.currentTarget as HTMLElement;
 
     hideDropdown(currentTarget);
   });
-  dropdown.addEventListener('keydown', (event: KeyboardEvent) => {
-    const currentTarget = event.currentTarget as HTMLElement;
+  dropdown.addEventListener('keydown', (e: KeyboardEvent) => {
+    const currentTarget = e.currentTarget as HTMLElement;
 
-    if (event.keyCode === 13 || event.keyCode === 40) {
-      event.preventDefault();
+    if (e.keyCode === 13 || e.keyCode === 40) {
+      e.preventDefault();
 
       showDropdown(currentTarget);
     }
@@ -60,9 +60,9 @@ dropdowns.forEach(dropdown => {
 });
 
 document.addEventListener('click', (e: MouseEvent) => {
-  const target = e.target as HTMLElement;
+  const currentTarget = e.currentTarget as HTMLElement;
 
-  if (target.classList.contains('dropdown')) {
-    dropdowns.forEach(() => hideDropdown(target));
+  if (currentTarget.classList.contains('dropdown')) {
+    dropdowns.forEach(() => hideDropdown(currentTarget));
   }
 });

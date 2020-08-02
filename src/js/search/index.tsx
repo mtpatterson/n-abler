@@ -1,22 +1,22 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Category, Post, Tag } from '../types';
 import SearchPage from './SearchPage';
 
-interface InitSearchPage {
-  posts: Array<Record<string, unknown>>;
-  categories: Array<Record<string, unknown>>;
-  tags: Array<Record<string, unknown>>;
-  maxNumPages: number;
+interface InitSearchPageProps {
+  posts: Post[];
+  categories: Category[];
+  tags: Tag[];
+  maxNumPages: string;
 }
 
-/* eslint-disable */
 // use within PHP template to pass initial posts from PHP to React
-export const initSearchPage = ({
+export function initSearchPage({
   posts,
   categories,
   tags,
   maxNumPages
-}: InitSearchPage) => {
+}: InitSearchPageProps): void {
   const search = document.querySelector('.js-search-page');
 
   ReactDOM.render(
@@ -24,8 +24,8 @@ export const initSearchPage = ({
       initialPosts={posts}
       categories={categories}
       tags={tags}
-      maxNumPages={maxNumPages}
+      maxNumPages={Number(maxNumPages)}
     />,
     search
   );
-};
+}

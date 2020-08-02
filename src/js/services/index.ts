@@ -1,10 +1,14 @@
 import debounce from 'lodash/debounce';
 import uniqBy from 'lodash/uniqBy';
+import { FilteredBy, NewPostsAndCount, Post } from '../types';
 
 // WordPress default is 10
-export const PER_PAGE = '10';
+const PER_PAGE = '10';
 
-export async function fetchPosts(query, params = '') {
+export async function fetchPosts(
+  query: string,
+  params: string
+): Promise<NewPostsAndCount> {
   try {
     // use try block to test if the request is sucessful
     const res = await fetch(
@@ -16,29 +20,39 @@ export async function fetchPosts(query, params = '') {
 
     return {
       newPosts,
-      newPages
+      newPages: Number(newPages)
     };
   } catch (err) {
     console.log(err);
   }
 }
 
-export function debounceFetchPosts(query, params) {
+export function debounceFetchPosts(
+  query: string,
+  params = ''
+): Promise<NewPostsAndCount> {
   return debounce(() => fetchPosts(query, params), 500, {
     leading: true
   })();
 }
 
 export async function fetchFilteredPosts(
-  value,
-  filteredBy,
+  query: string,
+  filteredBy: FilteredBy,
   pageParam = '',
-  scrollingType
-) {
+  scrollingType = ''
+): Promise<{
+  newPosts: Post[];
+  newPages: number;
+  newPagesCats: number;
+  newPagesTags: number;
+  currentPage: number;
+}> {
   let newByCategory = {
     newPosts: [],
     newPages: 0
   };
+
   let newByTag = {
     newPosts: [],
     newPages: 0
@@ -48,7 +62,7 @@ export async function fetchFilteredPosts(
     if (scrollingType === 'cats') {
       // only make request for categories if filtering by category
       newByCategory = await fetchPosts(
-        value,
+        query,
         `&_embed&categories=${filteredBy.categories}${pageParam}`
       );
     }
@@ -56,7 +70,7 @@ export async function fetchFilteredPosts(
     // only make request for tags if filtering by tag
     if (scrollingType === 'tags') {
       newByTag = await fetchPosts(
-        value,
+        query,
         `&_embed&tags=${filteredBy.tags}${pageParam}`
       );
     }
@@ -64,7 +78,7 @@ export async function fetchFilteredPosts(
     if (filteredBy.categories.length > 0) {
       // only make request for categories if filtering by category
       newByCategory = await fetchPosts(
-        value,
+        query,
         `&_embed&categories=${filteredBy.categories}${pageParam}`
       );
     }
@@ -72,7 +86,7 @@ export async function fetchFilteredPosts(
     // only make request for tags if filtering by tag
     if (filteredBy.tags.length > 0) {
       newByTag = await fetchPosts(
-        value,
+        query,
         `&_embed&tags=${filteredBy.tags}${pageParam}`
       );
     }
@@ -83,7 +97,7 @@ export async function fetchFilteredPosts(
 
   if (allFiltersRemoved) {
     const { newPosts, newPages } = await fetchPosts(
-      value,
+      query,
       `&_embed${pageParam}`
     );
 
@@ -100,7 +114,7 @@ export async function fetchFilteredPosts(
       newPages: 1,
       newPagesCats: Number(newByCategory.newPages),
       newPagesTags: Number(newByTag.newPages),
-      currentPage: false
+      currentPage: 0
     };
   }
 }
