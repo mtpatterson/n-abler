@@ -1,28 +1,23 @@
 import * as React from 'react';
-import { FC } from 'react';
+import { Post } from './types';
 import { KeyboardEvent, LegacyRef } from 'react';
 
 interface NavbarSearchDropdownProps {
-  posts: Array<Record<string, unknown>>;
+  posts: Post[];
   handlePostsKeyDown: (e: KeyboardEvent<HTMLAnchorElement>) => void;
   firstAnchorRef: LegacyRef<HTMLAnchorElement>;
 }
 
-const NavbarSearchDropdown: FC<NavbarSearchDropdownProps> = ({
+function NavbarSearchDropdown({
   posts,
   handlePostsKeyDown,
   firstAnchorRef
-}: NavbarSearchDropdownProps) => {
+}: NavbarSearchDropdownProps): JSX.Element {
   return (
     <div className="na-search-dropdown">
       {posts.length > 0 ? (
-        posts.map((post: Record<string, unknown>, index: number) => {
-          interface PostTitle {
-            rendered: string;
-          }
-
-          const title = post.title as PostTitle;
-          const slug = post.slug as string;
+        posts.map((post: Post, index: number) => {
+          const { title, slug } = post;
 
           return (
             <a
@@ -41,6 +36,6 @@ const NavbarSearchDropdown: FC<NavbarSearchDropdownProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default NavbarSearchDropdown;

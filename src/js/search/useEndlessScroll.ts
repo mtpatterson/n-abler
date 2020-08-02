@@ -1,21 +1,26 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { FilteredBy, Post } from '../types';
 import { fetchFilteredPosts } from '../services';
 
 export default function useEndlessScroll(
-  initialPosts,
-  query,
-  pages,
-  pagesCats,
-  pagesTags,
-  filteredBy,
-  loading,
-  setLoading
-) {
-  const [prevQuery, setPrevQuery] = useState(query);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentPageCats, setCurrentPageCats] = useState(1);
-  const [currentPageTags, setCurrentPageTags] = useState(1);
-  const [posts, setPosts] = useState(initialPosts);
+  initialPosts: Post[],
+  query: string,
+  pages: number,
+  pagesCats: number,
+  pagesTags: number,
+  filteredBy: FilteredBy,
+  loading: boolean,
+  setLoading: Dispatch<SetStateAction<boolean>>
+): [
+  Post[],
+  Dispatch<SetStateAction<Post[]>>,
+  Dispatch<SetStateAction<number>>
+] {
+  const [prevQuery, setPrevQuery] = useState<string>(query);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPageCats, setCurrentPageCats] = useState<number>(1);
+  const [currentPageTags, setCurrentPageTags] = useState<number>(1);
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
 
   // reset current page when query changes
   useEffect(() => {
@@ -25,7 +30,12 @@ export default function useEndlessScroll(
   }, [query, prevQuery]);
 
   useEffect(() => {
-    async function handleGetNewPage(pages, current, setCurrent, scrollingType) {
+    async function handleGetNewPage(
+      pages: number,
+      current: number,
+      setCurrent: Dispatch<SetStateAction<number>>,
+      scrollingType: string
+    ) {
       const nextPage = current + 1;
 
       if (!loading && nextPage <= pages) {
