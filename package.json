@@ -29,6 +29,7 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "@testing-library/react": "^10.4.4",
+    "@types/jest": "^26.0.8",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.uniqby": "^4.7.6",
     "@types/react": "^16.9.43",
@@ -91,10 +92,10 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
-      "<rootDir>/test/setup/setupTests.js"
+      "<rootDir>/test/setup/setupTests.ts"
     ],
     "moduleNameMapper": {
-      "^@frontend/(.*)$": "<rootDir>/src/js/$1"
+      "^@frontend/(.*)$": "<rootDir>/src/ts/$1"
     },
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [

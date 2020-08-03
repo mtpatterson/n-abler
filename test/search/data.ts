@@ -2,6 +2,7 @@ export const posts = [
   {
     id: 94,
     title: { rendered: 'Testo' },
+    slug: 'testo',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -45,6 +46,7 @@ export const posts = [
   {
     id: 92,
     title: { rendered: 'Testamundo' },
+    slug: 'testamundo',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -106,6 +108,7 @@ export const posts = [
   {
     id: 89,
     title: { rendered: 'N-abler hello' },
+    slug: 'n-abler-hello',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -149,6 +152,7 @@ export const posts = [
   {
     id: 87,
     title: { rendered: 'N-abler Test' },
+    slug: 'n-abler-test',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -179,6 +183,7 @@ export const posts = [
   {
     id: 84,
     title: { rendered: 'N-Abler #' },
+    slug: 'n-abler-#',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -234,6 +239,7 @@ export const posts = [
   {
     id: 82,
     title: { rendered: 'N-Abler X' },
+    slug: 'n-abler-x',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -282,6 +288,7 @@ export const posts = [
   {
     id: 78,
     title: { rendered: 'Something' },
+    slug: 'something',
     _embedded: {
       'wp:featuredmedia':
         'http://localhost:3000/wp-content/uploads/2020/05/dog.jpeg',
@@ -313,6 +320,7 @@ export const posts = [
   {
     id: 76,
     title: { rendered: 'Test 6' },
+    slug: 'test-6',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -343,6 +351,7 @@ export const posts = [
   {
     id: 74,
     title: { rendered: 'Test 5' },
+    slug: 'test-5',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [
@@ -373,6 +382,7 @@ export const posts = [
   {
     id: 72,
     title: { rendered: 'Test 4' },
+    slug: 'test-4',
     _embedded: {
       'wp:featuredmedia': false,
       'wp:term': [

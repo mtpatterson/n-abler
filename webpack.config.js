@@ -4,8 +4,8 @@ const path = require('path');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    main: './src/js/index.tsx',
-    search: './src/js/search/index.tsx'
+    main: './src/ts/index.tsx',
+    search: './src/ts/search/index.tsx'
   },
   output: {
     filename: '[name].bundle.js',
@@ -40,7 +40,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@frontend': path.resolve(__dirname, './src/js')
+      '@frontend': path.resolve(__dirname, './src/ts')
     },
     extensions: ['.ts', '.tsx', '.js']
   },

@@ -2,19 +2,21 @@
 
 ## Built With
 
-- [WordPress](https://wordpress.org/) - CMS
+- [TypeScript](https://reactjs.org/docs/getting-started.html) - JavaScript Framework
 - [React](https://reactjs.org/docs/getting-started.html) - JavaScript Framework
 - [Bootstrap](https://getbootstrap.com/) - CSS Framework
-- [Sass](https://sass-lang.com/) - CSS Preprocesser
+- [SCSS](https://sass-lang.com/) - CSS Preprocesser
 - [Webpack](https://webpack.js.org/) - JavaScript Module Bundler
+- [PHP](https://www.php.net/) - Hypertext Preprocessor
+- [WordPress](https://wordpress.org/) - CMS
 
 # Scripts and Styles
 
 ## Webpack Bundles
 
-If you need to add a JavaScript file that will run on every page, import it into `/src/js/index` or write it there
+If you need to add a JavaScript file that will run on every page, import it into `/src/ts/index` or write it there
 
-If it is page specific, add a property to the `entry` object in `webpack.config.js`. For example, `search: './src/js/search/index.js'` will build `dist/search.js`
+If it is page specific, add a property to the `entry` object in `webpack.config.js`. For example, `search: './src/ts/search/index.tsx'` will build `dist/search.bundle.js`
 
 ## SCSS to CSS
 
