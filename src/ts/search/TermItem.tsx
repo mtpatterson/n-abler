@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 interface TermItemProps {
   name: string;
-  count: string;
+  count: number;
   index: number;
   handleFilterByTerm: () => void;
 }

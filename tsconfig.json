@@ -7,7 +7,10 @@
     "moduleResolution": "node",
     "jsx": "react",
     "target": "es6",
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "paths": {
+      "@frontend/*": ["ts/*"]
+    }
   },
   "exclude": ["node_modules"]
 }

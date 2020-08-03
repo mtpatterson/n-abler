@@ -9,13 +9,13 @@ export type Post = {
 
 export type Category = {
   cat_name: string;
-  category_count: string;
+  category_count: number;
   term_id: number;
 };
 
 export type Tag = {
   name: string;
-  count: string;
+  count: number;
   term_id: number;
 };
 
