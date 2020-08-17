@@ -62,7 +62,7 @@ dropdowns.forEach(dropdown => {
 document.addEventListener('click', (e: MouseEvent) => {
   const currentTarget = e.currentTarget as HTMLElement;
 
-  if (currentTarget.classList.contains('dropdown')) {
+  if (currentTarget.classList && currentTarget.classList.contains('dropdown')) {
     dropdowns.forEach(() => hideDropdown(currentTarget));
   }
 });
