@@ -44,25 +44,11 @@
 
 	<div class="site-info">
 		<div class="row">
-			<ul class="col-xs-12 col-md-2">
-				<li><b class="na-footer-title">Tools</b></li>
-				<li>
-					<a href="/n-abler-ii">N-Abler II</a>
-				</li>
-				<li>
-					<a href="/n-abler-iii">N-Abler III</a>
-				</li>
-				<li>
-					<a href="/n-abler-iv">N-Abler IV</a>
-				</li>
-			</ul>
+
 			<ul class="col-xs-12 col-md-2">
 				<li><b class="na-footer-title">Learn</b></li>
 				<li>
 					<a href="/contact">Contact</a>
-				</li>
-				<li>
-					<a href="/about">About</a>
 				</li>
 				<li>
 					<a href="/terms">Terms of Use</a>
