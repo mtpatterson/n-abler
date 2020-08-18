@@ -20,3 +20,9 @@ export function normalizeUrl(
     return featuredMedia;
   }
 }
+
+export function parseHTML(html: string): string {
+  const parser = new DOMParser();
+
+  return parser.parseFromString(html, 'text/html').body.textContent;
+}
