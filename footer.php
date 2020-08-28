@@ -51,7 +51,7 @@
 					<a href="/contact">Contact</a>
 				</li>
 				<li>
-					<a href="/terms">Terms of Use</a>
+					<a href="/privacy-policy">Terms of Use</a>
 				</li>
 			</ul>
 		</div>
