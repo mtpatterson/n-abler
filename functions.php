@@ -189,3 +189,10 @@ function search_only_for_posts($query) {
 	return $query;
 }
 add_filter('pre_get_posts','search_only_for_posts');
+
+/**
+ * Load Jetpack compatibility file.
+ */
+if (defined('JETPACK__VERSION')) {
+	require get_template_directory() . '/inc/jetpack.php';
+}
