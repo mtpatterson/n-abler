@@ -64,10 +64,6 @@ li {
   background: #ddd;
 }
 
-.navbar-toggler {
-  margin-top: -30px;
-}
-
 .na-search-form-navbar {
   position: relative;
   width: 100%;
@@ -229,6 +225,15 @@ body {
 .na-break-line {
   width: 150px;
   margin: 0 auto;
+}
+
+.na-title-first {
+  margin-bottom: 100px;
+}
+@media (min-width: 992px) {
+  .na-title-first {
+    margin-bottom: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
