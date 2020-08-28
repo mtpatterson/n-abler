@@ -32,7 +32,7 @@
 			</div>
 
 			<button
-				class="navbar-toggler"
+				class="na-navbar-toggler navbar-toggler"
 				type="button"
 				data-toggle="collapse"
 				data-target="#navbarItems"

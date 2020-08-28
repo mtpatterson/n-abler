@@ -65,3 +65,11 @@ body {
   width: 150px;
   margin: 0 auto;
 }
+
+.na-title-first {
+  margin-bottom: 100px;
+
+  @media #{$medium} {
+    margin-bottom: 0;
+  }
+}
