@@ -19,7 +19,7 @@ $image_3 = get_field('image_3');
                 <div class="na-title-first">
                     <h1 class="na-home-title">Texas Assistive Devices</h1>
                     <h2>Manufacturers of Upper Extremity Components for Persons with Hand Dysfunction and Amputation.</h2>
-                    <p class="text-right"><a href="/?s=" class="btn btn-warning">Search Now</a></p>
+                    <p class="text-right"><a href="/?s=" class="btn btn-warning">Search and Browse</a></p>
                 </div>
                 <p>If you would like to order a demo kit or place an order, please <a href="mailto:orders@n-abler.org">click</a></p>
                 <p>If you would like a printed catalog of our product line sent to you, please <a href="mailto:orders@n-abler.org">click</a></p>
