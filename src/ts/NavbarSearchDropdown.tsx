@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Post } from './types';
 import { KeyboardEvent, LegacyRef } from 'react';
+import { parseHTML, truncate } from './utils';
 
 interface NavbarSearchDropdownProps {
   posts: Post[];
@@ -27,7 +28,7 @@ function NavbarSearchDropdown({
               ref={index === 0 ? firstAnchorRef : null}
               className="na-search-dropdown-item btn"
             >
-              {title.rendered}
+              {truncate(parseHTML(title.rendered))}
             </a>
           );
         })

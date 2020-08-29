@@ -26,3 +26,11 @@ export function parseHTML(html: string): string {
 
   return parser.parseFromString(html, 'text/html').body.textContent;
 }
+
+export function truncate(string: string): string {
+  if (string.length <= 28) {
+    return string;
+  }
+
+  return `${string.substring(0, 25)}...`;
+}
