@@ -55,7 +55,7 @@ function NavbarSearch({ postReq }: { postReq: string }): JSX.Element {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
 
-      const previousElement = currentTarget.previousSibling as HTMLElement;
+      const previousElement = currentTarget.previousElementSibling as HTMLElement;
 
       if (previousElement) {
         previousElement.focus();
