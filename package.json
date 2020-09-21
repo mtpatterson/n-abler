@@ -11,7 +11,7 @@
     "watch:css": "npm run build:css && onchange 'src/scss/**/*.scss' -- npm run build:css",
     "webpack": "webpack -d --watch",
     "start": "rimraf dist && webpack -d && npm run build:css && npm-run-all --parallel browser-sync watch:css webpack",
-    "build": "webpack -d",
+    "build": "webpack -p",
     "format": "prettier --ignore-path .eslintignore \"**/*.+(js|json)\" --write",
     "lint": "eslint . --quiet",
     "test": "jest --watch",
