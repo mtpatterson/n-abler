@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "description": "n-abler.org main theme",
-  "author": "Brandon Patterson",
   "scripts": {
     "browser-sync": "browser-sync start --proxy 'n-abler.localhost' --watch --files '**/*.php, dist/**/*' --no-notify --plugins='bs-eslint-message'",
     "prefix:css": "postcss dist/*.css --use=autoprefixer --dir=dist",
