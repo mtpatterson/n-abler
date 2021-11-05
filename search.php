@@ -30,6 +30,8 @@ while ( have_posts() ) : the_post();
 
 endwhile;
 
+sort($initial_posts);
+
 get_header();
 ?>
 	<section id="primary" class="content-area">

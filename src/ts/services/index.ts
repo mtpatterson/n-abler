@@ -12,7 +12,7 @@ export async function fetchPosts(
   try {
     // use try block to test if the request is sucessful
     const res = await fetch(
-      `/wp-json/wp/v2/posts?per_page=${PER_PAGE}&search=${query}${params}`
+      `/wp-json/wp/v2/posts?per_page=${PER_PAGE}&search=${query}${params}&filter[orderby]=date&order=asc`
     );
 
     const newPosts = await res.json();
