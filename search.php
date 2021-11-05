@@ -9,26 +9,34 @@
 global $wp_query;
 
 $initial_posts = [];
+$args = array(
+	'post_type' => 'post',
+	'post_status' => 'publish',
+	'posts_per_page' => 10,
+	'orderby' => 'name',
+	'order' => 'ASC'
+);
+$query = new WP_Query($args);
 
-while ( have_posts() ) : the_post();
+if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
+		// add data from WordPress to an array
+		array_push($initial_posts, array(
+			'id' => get_the_ID(),
+			'slug'=> get_permalink(),
+			'title' => array(
+				'rendered' => get_the_title(),
+			),
+			'_embedded' => array(
+				'wp:featuredmedia' => get_the_post_thumbnail_url(null),
+				'wp:term' => array(
+					get_the_category(),
+					get_the_tags()
+				)
+			),
+		));
 
-	// add data from WordPress to an array
-	array_push($initial_posts, array(
-		'id' => get_the_ID(),
-		'slug'=> get_permalink(),
-		'title' => array(
-			'rendered' => get_the_title(),
-		),
-		'_embedded' => array(
-			'wp:featuredmedia' => get_the_post_thumbnail_url(null),
-			'wp:term' => array(
-				get_the_category(),
-				get_the_tags()
-			)
-		),
-	));
-
-endwhile;
+	endwhile;
+endif;
 
 get_header();
 ?>
