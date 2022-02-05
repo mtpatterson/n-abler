@@ -2,7 +2,7 @@
 
 ## Built With
 
-- [TypeScript](https://reactjs.org/docs/getting-started.html) - JavaScript Framework
+- [TypeScript](https://reactjs.org/docs/getting-started.html) - Superset of JavaScript
 - [React](https://reactjs.org/docs/getting-started.html) - JavaScript Framework
 - [Bootstrap](https://getbootstrap.com/) - CSS Framework
 - [SCSS](https://sass-lang.com/) - CSS Preprocesser
